@@ -12,29 +12,6 @@
     {
       "modelPath": "model/messages.FDL",
       "scenarioName": "Message interaction - basics"
-    },
-    {
-      "modelPath": "model/messages.FDL",
-      "scenarioName": "Message interactions - advanced",
-      "defines": [
-        "ADVANCED"
-      ]
-    },
-    {
-      "modelPath": "model/methods.FDL",
-      "scenarioName": "Object interactions"
-    },
-    {
-      "modelPath": "model/timers.FDL",
-      "scenarioName": "Timer management"
-    },
-    {
-      "modelPath": "model/actions.FDL",
-      "scenarioName": "Actions"
-    },
-    {
-      "modelPath": "model/resources-states-and-more.FDL",
-      "scenarioName": "Resources, states, hyperlinks and preprocessor macros"
     }
   ],
 
@@ -85,24 +62,8 @@
       ]
     },
     {
-      "documentName": "tier4",
-      "interactionLevel": "subsystem"
-    },
-    {
-      "documentName": "tier5",
-      "interactionLevel": "system",
-      "defines": [
-        "PRESENTATION",
-        "USE_CALLOUT_REMARKS"
-      ]
-    },
-    {
       "documentType": "context-diagram",
       "documentName": "context"
-    },
-    {
-      "documentName": "desert-city",
-      "interfaceFilter": "DesertCity"
     }
   ]
 }

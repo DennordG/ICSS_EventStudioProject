@@ -2,100 +2,11 @@
 
 {MyTheme} feature "Message interactions" {
 
-/* The ifdef conditions in this document shows how a single FDL file can be used to define multiple
-scenarios by using #ifdef and #ifndef. The defines may be specified for individual documents
-and scenarios in the project.scn.json file.
-
-In this project advanced sections are included only if the ADVANCED flag is enabled in a scenario.
-Refer to the project.scn.json file for the definition of basic and advanced tutorial scenarios.
-*/
-
-#ifdef ADVANCED
-   heading "Message interactions - Advanced"
-#else
    heading "Message interactions - Basics"
-#endif
 
-   /* Block remarks are displayed in a block that spawns across the full sequence diagram.
-   Use this to summarize a feature or a sequence. */
-
-|= A block remark is shown across the full sequence diagram. 
-   A block remark may be shown across multiple lines. =|
-    
-   /* Use sequence blocks to group together interactions. Sequences may be nested.
-      A PDF level bookmark and an enclosing box is used to represent a sequence. */
-
-   sequence "Messages" {
-
-     /* FDL supports statements and their attached remarks. The remarks are included only if the
-     the FDL statement preceding it is included in the diagram. 
-     
-     A remark may be single line (Starts with % and ends at the end of the current line) or
-     Multi-line (Enclosed in |* and *|) */
-#ifndef ADVANCED     
-      Message (attribute="Value", field): "Los Angeles" -> "Las Vegas"
-      % Message Statement: Model messages interactions with parameters.
-
-      MessageResponse : "Los Angeles" <- "Las Vegas"
-      % Message Statement: Model messages interactions (no parameters specified in this case). 
-
-      "Self Message" : "Las Vegas" -> "Las Vegas"
-      % Model messages to self. 
-          
-      "Message with Bold Arrow" : "Los Angeles" => Jaipur
-      % Use the => or <= to represent messages with bold arrows. 
-
-      "Bidirectional Interaction" : "Los Angeles" <-> Jaipur
-      % Model bi-directional message interactions with <-> or <=>. 
-   
-#else 
-      /* ADVANCED */     
-      "Tagged Message" : "San Francisco"-"94123" -> "Los Angeles"-"90210"
-      % Tag the source and/or the destination of a message to identify the entity interacting at the source/destination. 
-
-     "Multi Line Message" + "- Sub header 1" + "- Sub header 2" (par1, par2) :"Las Vegas" -> Johannesburg
-     % Represent compound messages with the multi-line message syntax.
-
-     "Lost Message" : "Los Angeles" ->X Jaipur
-     % Model a lost message.
-#endif
-   }
-
-#ifdef ADVANCED
-   sequence "Message interactions with the environment" {
-       "Message from the Left Environment": env_l -> "San Francisco"
-       % Represent a message from an external entity (shown on the left).
-
-       "Message from the Right Environment": "Las Vegas" <- env_r
-       % External interaction from an external entity (shown on the right side).
-    }
-
-   sequence "Compound Messages" {
-      /* Message interactions that involve multiple senders and receivers are
-      represented with Compound Messages. */
-      chain {
-        "Chain Message 1" (field1, field2): "Los Angeles" -> "San Francisco"
-        "Chain Message 2" (attribute1=Value1, attribute2=Value2): "San Francisco" -> Jaipur
-       }
-      |* Represent a chain of message interactions in a single line. 
-      Separate message names and parameters may be specified for each message interaction. *|
-
-      "Message Cascade" (param1, param2="Value"): "Los Angeles" ->  "San Francisco" -> "Las Vegas" -> Jaipur
-      % Represent a chain of message interactions involving forwarding of the same message. One set of message name and parameters may be specified. 
-      
-      "Bidirectional Interaction Cascade" : "Los Angeles" <->  "San Francisco" <-> "Las Vegas" <-> Jaipur
-      % Cascades work for bidirectional interactions as well. 
-   }
-
-   sequence "Multicasts" {
-      /* Represent a single message transmission that can be received at multiple nodes. */
-      "Los Angeles" multicasts "Academy Awards (Oscars)" (BestActor, BestActress, BestMovie) to "San Francisco", "Las Vegas", Johannesburg, Jaipur <http://oscar.go.com/>
-      % Model multicasts using this statement. The multicast sources is shown with a circle. A hyper link has been added to the multicast.
-      
-      "San Francisco" multicasts "The Steve Jobs Show" ("One more thing...") to "Los Angeles",  "Las Vegas", Johannesburg, Jaipur
-      % Another multicast. This time the multicast source is not at the edge. 
-   }
-#endif
-
-
+   "Vendor" invokes "Client"."ReadFeedback"
+   "Client" invokes "Server"."ReadFeedback"(vendorId)
+   "Server" action "Check if vendorId exists"
+   "Server"."ReadFeedback" returns (feedbacks)
+   "Client"."ReadFeedback" returns (feedbacks)
 }
