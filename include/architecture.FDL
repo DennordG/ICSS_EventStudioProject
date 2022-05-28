@@ -1,0 +1,39 @@
+/* We start with defining the architecture. You may define as five tier architecture
+as demonstrated in this example. If your are modeling a less complex system,
+you may choose a 4, 3, 2 or 1 tier architecture. */
+
+/* Tier 5: System declaration - Hemispheres */
+system: "Northern Hemisphere", "Southern Hemisphere"
+
+/* Tier 4: Subsystem declaration - Continents */
+subsystem: "North America" in "Northern Hemisphere", Asia in "Northern Hemisphere"
+subsystem: Africa in "Southern Hemisphere"
+
+/* Tier 3: Module declaration - Countries */
+module : "United States" in "North America", Canada in "North America"
+module : "South Africa" in Africa
+module : India in Asia
+
+/* Tier 2: Components are contained within modules - Provinces/States within countries. */
+component : California in "United States", Nevada in "United States"
+component : Ontario in Canada, Rajasthan in India
+component : Gauteng in "South Africa"
+
+/* Tier 1: eternal and dynamic objects
+   Eternal objects are contained in components - Cities */
+eternal : "Los Angeles" in California
+eternal: separator in California             /* separator declaration just creates an empty space between LA and SF. */
+eternal: "San Francisco" in California
+eternal : "Las Vegas": DesertCity in Nevada  /* Note that DesertCity type has been assigned to Las Vegas */
+eternal : Jaipur: DesertCity in Rajasthan    /* Jaipur is also assigned the DesertCity type */
+
+/* Note: You can generate interface sequence diagrams for "Las Vegas" and Jaipur.
+   If you generate an interface sequence diagram for a DesertCity, the diagram generated
+   will contain all interfaces of "Las Vegas" as well as Jaipur. */
+
+eternal : Johannesburg in Gauteng
+
+/* Dynamic objects - Using dynamic to share a single axis between two entities
+                     You may use dynamic to model objects that are created
+                     and destroyed during the execution of a feature */
+dynamic : Toronto | Ottawa in Ontario

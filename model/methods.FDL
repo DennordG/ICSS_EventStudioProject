@@ -1,0 +1,31 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Object interactions" {
+
+  sequence "Object Interactions" {
+   /* Model object interactions with method call and return. Method calls may be nested. */
+   "Los Angeles" invokes "San Francisco".TakeAction(actionId)
+      % Model method invocation and return. 
+      "San Francisco" invokes Jaipur.TakeAnotherAction(actionId)
+
+      Jaipur.TakeAnotherAction returns
+   "San Francisco".TakeAction returns
+   }
+   
+   sequence "Object Creation and Deletion" {
+      /* Manage creation and deletion of dynamic objects. */
+      "Los Angeles" creates Ottawa(param1 = "Good Bye", param2, param3 = Value)
+      % One object creates another. 
+      
+      "Los Angeles" deletes Ottawa
+      % One object deletes another. 
+      
+      create Toronto
+      |* Create object without specifying the creator. Use in sharing the same axis 
+      spot between multiple entries. *|
+        
+      delete Toronto
+      % Delete the object. The axis may be reused by another object. 
+   }
+
+}
