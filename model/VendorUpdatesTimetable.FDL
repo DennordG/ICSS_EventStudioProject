@@ -1,0 +1,19 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Message interactions" {
+
+   heading "Vendor updates timetable"
+
+   "Vendor" invokes "Client"."Access profile page"
+   "Client" invokes "Server"."RequestUserDetails"(vendorId)
+   "Server" action "Retrieves user details including timetable details"
+   "Server"."ReadTimetable" returns (userDetails)
+   "Client"."ReadTimetable" returns (userDetails)
+   "Vendor" invokes "Client"."Taps the timetable icon"
+   "Client" invokes "Vendor"."Google Maps Address input form is displayed"
+   "Vendor" invokes "Client"."Manually sets marker on map & select timeslot from dropdown list"
+   "Client" invokes "Server"."RequestAddressDetails"(markerId)
+   "Server" action "Retrieves valid address based on marker id"
+   "Server"."ReadTimetableDetails" returns (timeslotDetails)
+   "Client" invokes "Vendor"."Timeslot is updated"
+}

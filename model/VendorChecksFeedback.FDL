@@ -1,0 +1,18 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Message interactions" {
+
+   heading "Vendor checks feedback"
+
+   "Vendor" invokes "Client"."Access profile page"
+   "Client" invokes "Server"."RequestUserDetails"(vendorId)
+   "Server" action "Retrieves user details including feedback received"
+   "Server"."ReadFeedback" returns (userDetails)
+   "Client"."ReadFeedback" returns (userDetails)
+
+   sequence "Loops" {
+      "Scrolls through feedback entries": "Vendor" -> "Client"
+      "Client" action "Displays feedback entries"
+      "Feedback entries are displayed": "Client" -> "Vendor"
+   }
+}

@@ -1,0 +1,22 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Message interactions" {
+
+   heading "Vendor updates location"
+
+   "Vendor" invokes "Client"."Access profile page"
+   "Client" invokes "Server"."RequestUserDetails"(vendorId)
+   "Server" action "Retrieves user details including location details"
+   "Server"."ReadLocation" returns (userDetails)
+   "Client"."ReadLocation" returns (userDetails)
+   "Vendor" invokes "Client"."Tap the location icon"
+   "Client" invokes "Vendor"."Google Maps Address input form is displayed"
+
+   #ifdef GPS_Permission_Not_Granted
+   heading "GPS Permission Not Granted"
+   "Vendor" invokes "Client"."User grants location access"
+   #else
+   heading "GPS Permission Granted"
+   "Client" invokes "Vendor"."Opens popup to request location access"
+   #endif
+}

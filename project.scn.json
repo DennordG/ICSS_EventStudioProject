@@ -10,7 +10,15 @@
                                    flow specific to this scenario.*/
   "scenarios": [
     {
-      "modelPath": "model/messages.FDL",
+      "modelPath": "model/VendorChecksFeedback.FDL",
+      "scenarioName": "Message interaction - basics"
+    },
+    {
+      "modelPath": "model/VendorUpdatesTimetable.FDL",
+      "scenarioName": "Message interaction - basics"
+    },
+    {
+      "modelPath": "model/VendorUpdatesLocation.FDL",
       "scenarioName": "Message interaction - basics"
     }
   ],
@@ -42,28 +50,6 @@
   "documents": [
     {
       "documentName": "tier1"
-    },
-    {
-      "documentName": "tier2",
-      "interactionLevel": "component",
-      "defines": [
-        "POSTER",
-        "USE_MULTI_TIER_HEADER"
-      ]
-    },
-    {
-      "documentName": "tier3",
-      "interactionLevel": "module",
-      "defines": [
-        "USE_MULTI_TIER_HEADER"
-      ],
-      "exclude": [
-        "remarks"
-      ]
-    },
-    {
-      "documentType": "context-diagram",
-      "documentName": "context"
     }
   ]
 }
