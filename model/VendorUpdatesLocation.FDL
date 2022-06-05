@@ -12,11 +12,20 @@
    "Vendor" invokes "Client"."Tap the location icon"
    "Client" invokes "Vendor"."Google Maps Address input form is displayed"
 
-   #ifdef GPS_Permission_Not_Granted
-   heading "GPS Permission Not Granted"
-   "Vendor" invokes "Client"."User grants location access"
+   #ifdef GPS_Permission_Status_Enabled
+   "Vendor" state = "GPS Permission Granted"
    #else
-   heading "GPS Permission Granted"
+   "Vendor" state = "GPS Permission Not Granted"
    "Client" invokes "Vendor"."Opens popup to request location access"
+   sequence "GPS Location" {   
+      "Vendor" invokes "Client"."User grants location access"
+      "Client" invokes "Server"."Current address is queried using the GPS coordinates"
+      "Server"."FindLocation" returns (Valid_Address)
+      "Client" invokes "Vendor"."Location gets set based on the server response"
+      }
+   sequence "Manually setting the address" {
+      "Vendor" invokes "Client"."Types the address"
+      "Client" invokes "Vendor"."Location gets set based on current search"
+      }
    #endif
 }
