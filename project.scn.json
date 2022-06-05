@@ -21,6 +21,10 @@
       "modelPath": "model/login.FDL",
       "scenarioName": "Login flow - wrong credentials",
       "defines": ["WRONG_CREDENTIALS"]
+    },
+    {
+      "modelPath": "model/register-as-vendor.FDL",
+      "scenarioName": "Register as vendor"
     }
   ],
 

@@ -1,0 +1,31 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Register as vendor" {
+
+
+"Vendor" action "Tap on Register as Vendor button"
+"Client" action "Display Register as Vendor screen"
+"Vendor" action "Fill in the registration details"
+"Client" action "Validate input data"
+"Client" invokes "Server"."CheckEmailUniqueness"
+"Server" action "Check email uniqueness"
+"Server"."CheckEmailUniqueness" returns (boolean_value)
+
+sequence "ALT" {
+   sequence "Valid form" {
+         sequence "Unique email" {
+            "Vendor" invokes "Client"."RegisterVendor"(register_details)
+            "Client" invokes "Server"."RegisterVendor"(register_details)
+            "Server" action "Create vendor account with pending status"
+            NotifyAdmin : Server -> Admin
+            % Notify Admin to review the new registration request
+            "Server"."RegisterVendor" returns (Created_vendor_account_with_pending_status)
+            "Client"."RegisterVendor" returns (Wait_for_admin_to_approve_registration_request)
+         }
+
+         "Client" action "Display duplicate email error message"
+   }
+   "Client" action "Display validation errors"
+}
+
+}
