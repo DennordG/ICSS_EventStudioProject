@@ -12,6 +12,15 @@
     {
       "modelPath": "model/messages.FDL",
       "scenarioName": "Message interaction - basics"
+    },
+    {
+      "modelPath": "model/login.FDL",
+      "scenarioName": "Login flow - valid credentials"
+    },
+    {
+      "modelPath": "model/login.FDL",
+      "scenarioName": "Login flow - wrong credentials",
+      "defines": ["WRONG_CREDENTIALS"]
     }
   ],
 

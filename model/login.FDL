@@ -1,0 +1,41 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Login" {
+
+#ifdef WRONG_CREDENTIALS
+   heading "Login - wrong credentials"
+#else
+   heading "Login - correct credentials"
+#endif
+
+//Note: getting error for "Vendor", "Customer" invokes "some method"
+"Vendor" invokes "Client"."Login"(email, password)
+"Customer" invokes "Client"."Login"(email, password)
+"Admin" invokes "Client"."Login"(email, password)
+"Client" action "Redirects user to Login screen"
+"Vendor", "Customer", "Admin" action "Enters credentials"
+"Client" action "Validates Login form"
+
+sequence "ALT" {
+   sequence "Invalid form" {
+      "Client" action "Displays validation errors"
+      "Vendor", "Customer", "Admin" action "Solve validation errors"
+      "Client" action "Validates Login form"
+   }
+
+   sequence "Valid form" {
+      "Client" action "Waits for user to submit form"
+   }
+}
+
+"Vendor", "Customer", "Admin" action "Submits the Login form"
+"Client" invokes "Server"."Login"(email, password)
+"Server" action "Checks credentials"
+"Server"."Login" returns (Login_result)
+
+#ifndef WRONG_CREDENTIALS 
+   "Client"."Login" returns (Show_home_screen_for_each_type_of_user)
+#else 
+   "Client" action "Displays failed login message"
+#endif
+}
