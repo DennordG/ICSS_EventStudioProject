@@ -24,7 +24,12 @@
     },
     {
       "modelPath": "model/register-as-vendor.FDL",
-      "scenarioName": "Register as vendor"
+      "scenarioName": "Register as vendor - duplicate email"
+    },
+    {
+      "modelPath": "model/register-as-vendor.FDL",
+      "scenarioName": "Register as vendor - unique email",
+      "defines": ["UNIQUE_EMAIL"]
     }
   ],
 

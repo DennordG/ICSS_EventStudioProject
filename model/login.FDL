@@ -12,30 +12,30 @@
 "Vendor" invokes "Client"."Login"(email, password)
 "Customer" invokes "Client"."Login"(email, password)
 "Admin" invokes "Client"."Login"(email, password)
-"Client" action "Redirects user to Login screen"
-"Vendor", "Customer", "Admin" action "Enters credentials"
-"Client" action "Validates Login form"
+"Client" action "Display Login screen"
+"Vendor", "Customer", "Admin" action "Enter credentials"
+"Client" action "Validate Login form"
 
 sequence "ALT" {
    sequence "Invalid form" {
-      "Client" action "Displays validation errors"
+      "Client" action "Display validation errors"
       "Vendor", "Customer", "Admin" action "Solve validation errors"
-      "Client" action "Validates Login form"
+      "Client" action "Validate Login form"
    }
 
    sequence "Valid form" {
-      "Client" action "Waits for user to submit form"
+      "Client" action "Wait for user to submit form"
    }
 }
 
-"Vendor", "Customer", "Admin" action "Submits the Login form"
+"Vendor", "Customer", "Admin" action "Submit the Login form"
 "Client" invokes "Server"."Login"(email, password)
-"Server" action "Checks credentials"
+"Server" action "Check credentials"
 "Server"."Login" returns (Login_result)
 
 #ifndef WRONG_CREDENTIALS 
    "Client"."Login" returns (Show_home_screen_for_each_type_of_user)
 #else 
-   "Client" action "Displays failed login message"
+   "Client" action "Display failed login error message"
 #endif
 }
