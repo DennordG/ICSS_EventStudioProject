@@ -10,8 +10,134 @@
                                    flow specific to this scenario.*/
   "scenarios": [
     {
-      "modelPath": "model/messages.FDL",
-      "scenarioName": "Message interaction - basics"
+      // search without results for the provided area
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & no search results based on area",
+      "defines": [
+        "GPS_LOCATION"
+      ]
+    },
+    {
+      // search with results for the provided area
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & one or more search results based on area",
+      "defines": [
+        "GPS_LOCATION",
+        "AREA_SEARCH_RESULTS"
+      ]
+    },
+    {
+      // search with results for the provided area
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & no search results based on search string",
+      "defines": [
+        "GPS_LOCATION",
+        "AREA_SEARCH_RESULTS",
+        "SEARCH"
+      ]
+    },
+    {
+      // search with results for the provided area
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & one or more search results based on area and search string",
+      "defines": [
+        "GPS_LOCATION",
+        "AREA_SEARCH_RESULTS",
+        "SEARCH",
+        "SEARCH_STRING_RESULTS"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location (without search results)"
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location & area search results",
+      "defines": [
+        "AREA_SEARCH_RESULTS"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location & no search results - search string",
+      "defines": [
+        "AREA_SEARCH_RESULTS",
+        "SEARCH"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location & area and search string results",
+      "defines": [
+        "AREA_SEARCH_RESULTS",
+        "SEARCH",
+        "SEARCH_STRING_RESULTS"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - Granted location permission & no results",
+      "defines": [
+        "GRANTED_GPS_PERMISSION"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - Granted location permission & area search results",
+      "defines": [
+        "GRANTED_GPS_PERMISSION",
+        "AREA_SEARCH_RESULTS"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - Granted location permission & no results based on search string",
+      "defines": [
+        "GRANTED_GPS_PERMISSION",
+        "AREA_SEARCH_RESULTS",
+        "SEARCH"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - Granted location permission & area and search string results",
+      "defines": [
+        "GRANTED_GPS_PERMISSION",
+        "AREA_SEARCH_RESULTS",
+        "SEARCH",
+        "SEARCH_STRING_RESULTS"
+      ]
+    },
+    {
+      "modelPath": "model/check_timetable.FDL",
+      "scenarioName": "Check timetable - no timetable has been provided"
+    },
+    {
+      "modelPath": "model/check_timetable.FDL",
+      "scenarioName": "Check timetable - the timetable has been provided",
+      "defines": [
+        "TIMETABLE"
+      ]
+    },
+    {
+      "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - valid data, invalid email address",
+      "defines": [
+        "VALID_DATA"
+      ]
+    },
+    {
+      "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - invalid data"
+    },
+    {
+      "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - valid data and the account is successfully created",
+      "defines": [
+        "VALID_DATA",
+        "VALID_EMAIL"
+      ]
     }
   ],
 
@@ -41,24 +167,18 @@
                                    the content of individual documents. */
   "documents": [
     {
-      "documentName": "tier1"
+      "documentName": "tier1",
+      "defines": [
+        "LETTER",
+        "USE_MULTI_TIER_HEADER"      
+      ]
     },
     {
       "documentName": "tier2",
       "interactionLevel": "component",
       "defines": [
-        "POSTER",
+        "LETTER",
         "USE_MULTI_TIER_HEADER"
-      ]
-    },
-    {
-      "documentName": "tier3",
-      "interactionLevel": "module",
-      "defines": [
-        "USE_MULTI_TIER_HEADER"
-      ],
-      "exclude": [
-        "remarks"
       ]
     },
     {

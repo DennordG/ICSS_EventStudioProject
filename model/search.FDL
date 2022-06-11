@@ -1,0 +1,58 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Search food trucks" {
+    heading "Search food trucks"
+
+   sequence "Setting the location"{
+        "Customer" invokes "Client".TapOnSearchIcon
+        "Client" action "Check if the location permission is granted"
+        
+        #ifndef GRANTED_GPS_PERMISSION
+            "Open location popup": "Client" -> "Customer" 
+            #ifdef GPS_LOCATION
+                "Customer" invokes "Client".GrantsGPSPermission
+                "Client" action "Updates the current location using the GPS location"
+                "Client".GrantsGPSPermission returns
+            #else
+                "Customer" invokes "Client".ManuallyUpdateLocation(address)
+                "Client" action "Updates the current location based on the user's input"
+                "Client".ManuallyUpdateLocation returns
+            #endif
+        #else
+            "Location set (GPS)": "Client" -> "Customer" 
+        #endif
+   }
+   
+    "Client" invokes "Server".SearchFoodTrucks(address)
+    "Server".RequestFoodTrucks returns
+    #ifdef AREA_SEARCH_RESULTS
+        "Show results on map": "Client" -> "Customer"
+        #define SEARCH_RESULTS true
+    #else
+        "Show not found message": "Client" -> "Customer"
+    #endif /* AREA_SEARCH_RESULTS */
+   
+    #ifdef SEARCH
+        loop "Debounce search mechanism (optional)"{
+            "Customer" invokes "Client".TypesSearchString
+            "Client" invokes "Server".SearchFoodTrucks(address, search_string)
+            "Server" action "Search food trucks based on area and search string"
+            "Server"."SearchFoodTrucks" returns
+            #ifdef SEARCH_STRING_RESULTS
+                "Client".TypesSearchString returns ("Display the markers")
+                #define SEARCH_RESULTS true
+            #else
+                "Client".TypesSearchString returns ("Display not found message")
+                #undef SEARCH_RESULTS
+            #endif
+        }
+    #endif
+    "Client".TapOnSearchIcon returns
+    #ifdef SEARCH_RESULTS
+        "Customer" invokes "Client".TapOnMarker
+        "Client" invokes "Server".GetFoodTruckData
+        "Server" action "Fetch the food truck's data"
+        "Server".GetFoodTruckData returns (result = "Food truck's data")
+        "Client".TapOnMarker returns ("Display a popup with the data")
+    #endif /* SEARCH_RESULTS */
+}
