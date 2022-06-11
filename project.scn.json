@@ -122,14 +122,14 @@
     },
     {
       "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - invalid data"
+    },
+    {
+      "modelPath": "model/register.FDL",
       "scenarioName": "Customer registration - valid data, invalid email address",
       "defines": [
         "VALID_DATA"
       ]
-    },
-    {
-      "modelPath": "model/register.FDL",
-      "scenarioName": "Customer registration - invalid data"
     },
     {
       "modelPath": "model/register.FDL",

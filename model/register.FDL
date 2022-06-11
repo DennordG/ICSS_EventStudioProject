@@ -5,7 +5,7 @@
 
    sequence "Setting the location"{
         "Customer" invokes "Client".TapOnRegisterButton
-        "Client".TapOnRegisterButton returns ("Display the registrer activity")
+        "Client".TapOnRegisterButton returns ("Display the register activity")
         "Customer" invokes "Client".FillInRegistrationForm
         "Client" action "Validate the input data"
         
@@ -13,8 +13,8 @@
             "Client" invokes "Server".CheckIfEmailIsAlreadyUsed(email)
             #ifdef VALID_EMAIL
                 "Server".CheckIfEmailIsAlreadyUsed returns ("The email is valid")
-                "Client" invokes "Server".CreateAccount
-                "Server".CreateAccount returns
+                "Client" invokes "Server".CreateAccount(accountInformation)
+                "Server".CreateAccount returns ("Success")
                 "Client".FillInRegistrationForm returns ("Display login activity") 
             #else
                 "Server".CheckIfEmailIsAlreadyUsed returns ("The email is invalid")

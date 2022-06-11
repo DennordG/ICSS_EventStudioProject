@@ -6,31 +6,29 @@
     sequence "Setting the location"{
             "Customer" invokes "Client".TapOnSearchIcon
             "Client" action "Setting up the location"
+            "Client".TapOnSearchIcon returns
     }
    
     "Client" invokes "Server".SearchFoodTrucks(address)
-    "Server".SearchFoodTrucks returns (result = "array of food trucks positions")
-    "Show results on map": "Client" -> "Customer"
+    "Server".SearchFoodTrucks returns ("Food trucks")
+    "Client" action "Refresh map"
 
     "Customer" invokes "Client".TapOnMarker
-    "Client" invokes "Server".GetFoodTruckData
+    "Client" invokes "Server".GetFoodTruckData(foodTruckId)
     "Server" action "Fetch the food truck's data"
-    "Server".GetFoodTruckData returns (result = "Food truck's data")
+    "Server".GetFoodTruckData returns ("Food truck's data")
     "Client".TapOnMarker returns ("Display a popup with the data")
     "Customer" invokes "Client".TapsOnViewTimetableOption
-    "Client" invokes "Server".FetchTimetableInfo
+    "Client" invokes "Server".FetchTimetableInfo(foodTruckId)
     #ifdef TIMETABLE
-        "Server".FetchTimetableInfo returns (result = "timetable components")
+        "Server".FetchTimetableInfo returns ("timetable components")
         "Client".TapsOnViewTimetableOption returns ("Display the timetable map")
-        "Customer" invokes "Client".TapsOnATimetableMarker
+        "Customer" invokes "Client".TapsOnATimetableMarker(timetableId)
         "Client" invokes "Server".FetchTimetableElementInfo(timetableId)
-        "Server".FetchTimetableElementInfo returns (result = "Return the timetable data")
+        "Server".FetchTimetableElementInfo returns ("Timetable data")
         "Client".TapsOnATimetableMarker returns ("Display the timetable information (time and address)")
     #else
-        "Server".FetchTimetableInfo returns (result = "no results")
+        "Server".FetchTimetableInfo returns ("No results")
         "Client".TapsOnViewTimetableOption returns ("Show a warning message")
     #endif
-    
-    
-    "Client".TapOnSearchIcon returns
 }
