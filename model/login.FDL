@@ -2,40 +2,34 @@
 
 {MyTheme} feature "Login" {
 
-#ifdef WRONG_CREDENTIALS
-   heading "Login - wrong credentials"
-#else
-   heading "Login - correct credentials"
-#endif
+heading "Login"
 
-//Note: getting error for "Vendor", "Customer" invokes "some method"
-"Vendor" invokes "Client"."Login"(email, password)
-"Customer" invokes "Client"."Login"(email, password)
-"Admin" invokes "Client"."Login"(email, password)
-"Client" action "Display Login screen"
-"Vendor", "Customer", "Admin" action "Enter credentials"
+"Vendor" invokes "Client".TapOnLoginButton
+"Customer" invokes "Client".TapOnLoginButton
+"Admin" invokes "Client".TapOnLoginButton
+"Client".TapOnLoginButton returns ("Display Login screen")
+
+"Vendor" invokes "Client".FillInLoginForm
+"Customer" invokes "Client".FillInLoginForm
+"Admin" invokes "Client".FillInLoginForm
+
 "Client" action "Validate Login form"
 
-sequence "ALT" {
-   sequence "Invalid form" {
-      "Client" action "Display validation errors"
-      "Vendor", "Customer", "Admin" action "Solve validation errors"
-      "Client" action "Validate Login form"
-   }
-
-   sequence "Valid form" {
-      "Client" action "Wait for user to submit form"
-   }
-}
-
-"Vendor", "Customer", "Admin" action "Submit the Login form"
-"Client" invokes "Server"."Login"(email, password)
+#ifdef VALID_DATA
+"Client".FillInLoginForm returns ("Valid data")
+"Vendor" invokes "Client".SubmitLoginForm(email, password)
+"Customer" invokes "Client".SubmitLoginForm(email, password)
+"Admin" invokes "Client".SubmitLoginForm(email, password)
+"Client" invokes "Server".Login(email, password)
 "Server" action "Check credentials"
-"Server"."Login" returns (Login_result)
-
-#ifndef WRONG_CREDENTIALS 
-   "Client"."Login" returns (Show_home_screen_for_each_type_of_user)
-#else 
-   "Client" action "Display failed login error message"
+   #ifdef WRONG_CREDENTIALS
+      "Server".Login returns ("Failed login")
+      "Client".SubmitLoginForm returns ("Display failed login error message")
+   #else 
+   "Server".Login returns ("User was successfully authenticated")
+   "Client".SubmitLoginForm returns ("Show home screen for each type of user")
+   #endif
+#else
+   "Client".FillInLoginForm returns ("Display validation errors")
 #endif
 }

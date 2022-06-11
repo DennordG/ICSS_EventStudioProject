@@ -1,43 +1,33 @@
 #include "project-inc.FDL"
 
-{MyTheme} feature "Register as vendor" {
+{MyTheme} feature "Register as Vendor" {
 
-#ifdef UNIQUE_EMAIL
-   heading "Register - unique email"
+heading "Register as Vendor"
+
+"Vendor" invokes "Client".TapOnRegisterAsVendorButton
+"Client".TapOnRegisterAsVendorButton returns ("Display Register as Vendor screen")
+"Vendor" invokes "Client".FillInRegistrationForm
+
+"Client" action "Validate input data"
+
+#ifdef VALID_DATA
+   "Client" invokes "Server".CheckEmailUniqueness
+   "Server" action "Check email uniqueness"
+   #ifdef UNIQUE_EMAIL
+      "Server".CheckEmailUniqueness returns ("Unique email")
+      "Client" invokes "Server".RegisterAsVendor(registration_details)
+      "Server" action "Create vendor account with pending status"
+      NotifyAdmin : Server -> Admin
+      % Notify Admin to review the new registration request
+      "Server"."RegisterVendor" returns ("Created vendor account with pending status")
+      NotifyVendor: Client -> Vendor
+      % Wait for admin to approve the registration request
+      "Client".RegisterAsVendor returns ("Wait for Admin's decision")
+   #else
+         "Server".CheckEmailUniqueness returns ("Duplicate email")
+         "Client".FillInRegistrationForm returns ("Display duplicate email error message")
+   #endif   
 #else
-   heading "Register - duplicate email"
+   "Client".FillInRegistrationForm returns ("Display validation errors")
 #endif
-
-"Vendor" action "Tap on Register as Vendor button"
-"Client" action "Display Register as Vendor screen"
-"Vendor" action "Fill in the registration details"
-
-sequence "LOOP" {
-   "Client" action "Validate input data"
-}
-
-"Client" invokes "Server"."CheckEmailUniqueness"
-"Server" action "Check email uniqueness"
-"Server"."CheckEmailUniqueness" returns (boolean_value)
-
-sequence "ALT" {
-   sequence "Valid form" {
-      #ifdef UNIQUE_EMAIL
-         "Vendor" action "Submit Register form"
-         "Client" invokes "Server"."RegisterVendor"(register_details)
-         "Server" action "Create vendor account with pending status"
-         NotifyAdmin : Server -> Admin
-         % Notify Admin to review the new registration request
-         "Server"."RegisterVendor" returns (Created_vendor_account_with_pending_status)
-         NotifyVendor: Client -> Vendor
-         % Wait for admin to approve the registration request
-       
-      #else
-         "Client" action "Display duplicate email error message"
-      #endif
-   }
-   sequence "Invalid form" {
-      "Client" action "Display validation errors"
-   }
-}
 }
