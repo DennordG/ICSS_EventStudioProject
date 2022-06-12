@@ -24,13 +24,12 @@
     #ifdef AREA_SEARCH_RESULTS
         "Server".RequestFoodTrucks returns ("foodTrucks")
         "Client" action "Display the results on the map"
-        #define SEARCH_RESULTS true
     #else
         "Server".RequestFoodTrucks returns ("null")
         "Client" action "Show no results message"
     #endif /* AREA_SEARCH_RESULTS */
    
-    #ifdef SEARCH
+    #if defined(AREA_SEARCH_RESULTS) && defined(SEARCH)
         loop "Debounce search mechanism (optional)"{
             "Types the search string"(searchString): "Customer" -> "Client"
             "Client" invokes "Server".SearchFoodTrucks(address, searchString)
@@ -39,20 +38,20 @@
             #ifdef SEARCH_STRING_RESULTS
                 "Server".SearchFoodTrucks returns ("foodTrucks")
                 "Client" action "Display the results (the map is being refreshed)"
-                #define SEARCH_RESULTS true
             #else
                 "Server".SearchFoodTrucks returns ("null")
                 "Client" action "Show no results message"
-                #undef SEARCH_RESULTS
             #endif
         }
     #endif
     
-    #ifdef SEARCH_RESULTS
+    #if defined(AREA_SEARCH_RESULTS) && (!defined(SEARCH) || defined(SEARCH_STRING_RESULTS))
         "Taps on a marker": "Customer" -> "Client"
+
         "Client" invokes "Server".GetFoodTruckData(foodTruckId)
         "Server" action "Fetch the food truck's data"
         "Server".GetFoodTruckData returns ("foodTruckData")
+
         "Client" action "Display a popup with the data"
     #endif /* SEARCH_RESULTS */
 }

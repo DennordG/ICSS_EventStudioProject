@@ -10,7 +10,6 @@
         "Client" action "Setting up the location (GPS or manually)"
     }
    
-   
     sequence "Search food trucks"{
         |=
             A simplified version of the search feature - the search operation can be performed based on area or based on 
@@ -22,19 +21,25 @@
     }
 
     "Taps on marker": "Customer" -> "Client"
+
     "Client" invokes "Server".GetFoodTruckData(foodTruckId)
     "Server" action "Fetch the food truck's data"
     "Server".GetFoodTruckData returns ("foodTruckData")
+
     "Client" action "Display a popup with the data"
     "Taps on view timetable option": "Customer" -> "Client"
     "Client" invokes "Server".FetchTimetableInfo(foodTruckId)
+
     #ifdef TIMETABLE
         "Server".FetchTimetableInfo returns ("timetableComponents")
         "Client" action "Display the timetable map"
+
         "Taps on timetable marker": "Customer" -> "Client"
+
         "Client" invokes "Server".FetchTimetableElementInfo(timetableId)
         "Server".FetchTimetableElementInfo returns ("timetableData")
         "Client" action "Display the timetable information (time and address)"
+        
         "Taps on the map/close button": "Customer" -> "Client"
         "Client" action "The popup will be closed"
     #else

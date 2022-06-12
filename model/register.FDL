@@ -3,6 +3,7 @@
 {MyTheme} feature "Register" {
     "Taps on register button": "Customer" -> "Client"
     "Client" action "Display the register activity"
+
     "Fill in the registration form": "Customer" -> "Client"
     "Client" action "Validate the input data"
     
@@ -10,6 +11,7 @@
         "Client" invokes "Server".CheckIfEmailIsAlreadyUsed(email)
         #ifdef VALID_EMAIL
             "Server".CheckIfEmailIsAlreadyUsed returns ("valid")
+            
             "Client" invokes "Server".CreateAccount(accountInformation)
             "Server".CreateAccount returns ("success")
             "Client" action "Display login activity"
