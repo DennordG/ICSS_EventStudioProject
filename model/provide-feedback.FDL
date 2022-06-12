@@ -1,0 +1,47 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Provide feedback" {
+	preconditions {
+		"Customer" action "Logins with a valid customer account"
+	}
+
+	sequence "Setting the location" {
+			"Taps on search icon": "Customer" -> "Client"
+			|=
+					Setting the location by granting the location permission and using the GPS / manually updating the location / 
+					the location permission has been already given and the GPS will be used to set up the location
+			=|
+			"Client" action "Setting up the location (GPS or manually)"
+	}
+	
+	
+	sequence "Search food trucks" {
+			|=
+					A simplified version of the search feature - the search operation can be performed based on area or based on 
+					area and search string (as presented in the "Search food trucks" scenarios)
+			=|
+			"Client" invokes "Server".SearchFoodTrucks(address, searchString) % the search string is optional
+			"Server".SearchFoodTrucks returns ("foodTrucks")
+			"Client" action "Display the results on the map"
+	}
+
+	"Taps on marker": "Customer" -> "Client"
+
+	"Client" invokes "Server".GetFoodTruckData(foodTruckId)
+	"Server" action "Fetch the food truck's data"
+	"Server".GetFoodTruckData returns ("foodTruckData")
+	
+	"Client" action "Display a popup with the data"
+	"Taps on provide feedback option": "Customer" -> "Client"
+	"Client" action "Display a new feedback form"
+	"Fills in the feedback form and presses the submit button": "Customer" -> "Client"
+	"Client" action "Validates form"
+
+	#ifdef VALID_FORM
+		"Client" invokes "Server".SendFeedback(customerId, formDetails)
+		"Server".SendFeedback returns (success)
+		"Client" action "Inform the customer that the feedback message was sent successfully"
+	#else
+		"Client" action "Show a warning message about invalid form fields"
+	#endif
+}

@@ -110,7 +110,7 @@
         "GPS_LOCATION",
         "AREA_SEARCH_RESULTS",
         "SEARCH",
-        "SEARCH_STRING_RESULTS"
+        "SEARCH_RESULTS"
       ]
     },
     {
@@ -138,7 +138,7 @@
       "defines": [
         "AREA_SEARCH_RESULTS",
         "SEARCH",
-        "SEARCH_STRING_RESULTS"
+        "SEARCH_RESULTS"
       ]
     },
     {
@@ -172,7 +172,28 @@
         "GRANTED_GPS_PERMISSION",
         "AREA_SEARCH_RESULTS",
         "SEARCH",
-        "SEARCH_STRING_RESULTS"
+        "SEARCH_RESULTS"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & area and filters applied without results",
+      "defines": [
+        "GRANTED_GPS_PERMISSION",
+        "AREA_SEARCH_RESULTS",
+        "SEARCH",
+        "FILTER"
+      ]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & area and filters applied with results",
+      "defines": [
+        "GRANTED_GPS_PERMISSION",
+        "AREA_SEARCH_RESULTS",
+        "SEARCH",
+        "FILTER",
+        "SEARCH_RESULTS"
       ]
     },
     {
@@ -204,6 +225,24 @@
         "VALID_DATA",
         "VALID_EMAIL"
       ]
+    },
+    {
+      "modelPath": "model/see-menu.FDL",
+      "scenarioName": "See menu - no menu"
+    },
+    {
+      "modelPath": "model/see-menu.FDL",
+      "scenarioName": "See menu - menu exists",
+      "defines": ["MENU"]
+    },
+    {
+      "modelPath": "model/provide-feedback.FDL",
+      "scenarioName": "Provide feedback - invalid form"
+    },
+    {
+      "modelPath": "model/provide-feedback.FDL",
+      "scenarioName": "Provide feedback - valid form",
+      "defines": ["VALID_FORM"]
     }
   ],
 

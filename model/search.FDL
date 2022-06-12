@@ -1,7 +1,7 @@
 #include "project-inc.FDL"
 
 {MyTheme} feature "Search food trucks" {
-   sequence "Setting the location"{
+   sequence "Setting the location" {
         "Taps on search icon": "Customer" -> "Client"
         "Client" action "Check if the location permission is granted"
         
@@ -31,11 +31,17 @@
    
     #if defined(AREA_SEARCH_RESULTS) && defined(SEARCH)
         loop "Debounce search mechanism (optional)"{
-            "Types the search string"(searchString): "Customer" -> "Client"
-            "Client" invokes "Server".SearchFoodTrucks(address, searchString)
-            "Server" action "Search food trucks based on area and search string"
+            #ifdef FILTER
+                "Selects the search filters and types the search string": "Customer" -> "Client"
+                "Client" invokes "Server".SearchFoodTrucks(address, searchString, filters)
+                "Server" action "Search food trucks based on area, search string and selected filters"
+            #else
+                "Types the search string"(searchString): "Customer" -> "Client"
+                "Client" invokes "Server".SearchFoodTrucks(address, searchString)
+                "Server" action "Search food trucks based on area and search string"
+            #endif
             
-            #ifdef SEARCH_STRING_RESULTS
+            #ifdef SEARCH_RESULTS
                 "Server".SearchFoodTrucks returns ("foodTrucks")
                 "Client" action "Display the results (the map is being refreshed)"
             #else
@@ -45,7 +51,7 @@
         }
     #endif
     
-    #if defined(AREA_SEARCH_RESULTS) && (!defined(SEARCH) || defined(SEARCH_STRING_RESULTS))
+    #if defined(AREA_SEARCH_RESULTS) && (!defined(SEARCH) || defined(SEARCH_RESULTS))
         "Taps on a marker": "Customer" -> "Client"
 
         "Client" invokes "Server".GetFoodTruckData(foodTruckId)
