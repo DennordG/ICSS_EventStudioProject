@@ -50,6 +50,14 @@
   "documents": [
     {
       "documentName": "tier1"
+    },
+    {
+      "documentName": "tier2",
+      "interactionLevel": "component"
+    },
+    {
+      "documentType": "context-diagram",
+      "documentName": "context"
     }
   ]
 }
