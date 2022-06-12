@@ -1,0 +1,31 @@
+#include "project-inc.FDL"
+
+{MyTheme} feature "Check daily timetable" {
+    sequence "Setting the location"{
+        "Taps on search icon": "Customer" -> "Client"
+        "Client" action "Setting up the location"
+    }
+   
+    "Client" invokes "Server".SearchFoodTrucks(address)
+    "Server".SearchFoodTrucks returns ("foodTrucksArray")
+    "Client" action "Refresh map"
+
+    "Taps on marker": "Customer" -> "Client"
+    "Client" invokes "Server".GetFoodTruckData(foodTruckId)
+    "Server" action "Fetch the food truck's data"
+    "Server".GetFoodTruckData returns ("foodTruckData")
+    "Client" action "Display a popup with the data"
+    "Taps on view timetable option": "Customer" -> "Client"
+    "Client" invokes "Server".FetchTimetableInfo(foodTruckId)
+    #ifdef TIMETABLE
+        "Server".FetchTimetableInfo returns ("timetableComponentsArray")
+        "Client" action "Display the timetable map"
+        "Taps on timetable marker": "Customer" -> "Client"
+        "Client" invokes "Server".FetchTimetableElementInfo(timetableId)
+        "Server".FetchTimetableElementInfo returns ("timetableData")
+        "Client" action "Display the timetable information (time and address)"
+    #else
+        "Server".FetchTimetableInfo returns ("noResults")
+        "Client" action "Show a warning message"
+    #endif
+}

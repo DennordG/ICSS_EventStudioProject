@@ -115,7 +115,7 @@
     },
     {
       "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - manually updating the GPS location & no search results - search string",
+      "scenarioName": "Search food trucks - manually updating the GPS location & no results based on search string",
       "defines": [
         "AREA_SEARCH_RESULTS",
         "SEARCH"
@@ -132,14 +132,14 @@
     },
     {
       "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - Granted location permission & no results",
+      "scenarioName": "Search food trucks - granted location permission & no results",
       "defines": [
         "GRANTED_GPS_PERMISSION"
       ]
     },
     {
       "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - Granted location permission & area search results",
+      "scenarioName": "Search food trucks - granted location permission & area search results",
       "defines": [
         "GRANTED_GPS_PERMISSION",
         "AREA_SEARCH_RESULTS"
@@ -147,7 +147,7 @@
     },
     {
       "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - Granted location permission & no results based on search string",
+      "scenarioName": "Search food trucks - granted location permission & no results based on search string",
       "defines": [
         "GRANTED_GPS_PERMISSION",
         "AREA_SEARCH_RESULTS",
@@ -156,7 +156,7 @@
     },
     {
       "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - Granted location permission & area and search string results",
+      "scenarioName": "Search food trucks - granted location permission & area and search string results",
       "defines": [
         "GRANTED_GPS_PERMISSION",
         "AREA_SEARCH_RESULTS",
@@ -165,11 +165,11 @@
       ]
     },
     {
-      "modelPath": "model/check_timetable.FDL",
+      "modelPath": "model/check-timetable.FDL",
       "scenarioName": "Check timetable - no timetable has been provided"
     },
     {
-      "modelPath": "model/check_timetable.FDL",
+      "modelPath": "model/check-timetable.FDL",
       "scenarioName": "Check timetable - the timetable has been provided",
       "defines": [
         "TIMETABLE"

@@ -1,28 +1,26 @@
 #include "project-inc.FDL"
 
 {MyTheme} feature "Register" {
-    heading "Customer registration"
-
    sequence "Setting the location"{
-        "Customer" invokes "Client".TapOnRegisterButton
-        "Client".TapOnRegisterButton returns ("Display the register activity")
-        "Customer" invokes "Client".FillInRegistrationForm
+        "Taps on register button": "Customer" -> "Client"
+        "Client" action "Display the register activity"
+        "Fill in the registration form": "Customer" -> "Client"
         "Client" action "Validate the input data"
         
         #ifdef VALID_DATA
             "Client" invokes "Server".CheckIfEmailIsAlreadyUsed(email)
             #ifdef VALID_EMAIL
-                "Server".CheckIfEmailIsAlreadyUsed returns ("The email is valid")
+                "Server".CheckIfEmailIsAlreadyUsed returns ("valid")
                 "Client" invokes "Server".CreateAccount(accountInformation)
-                "Server".CreateAccount returns ("Success")
-                "Client".FillInRegistrationForm returns ("Display login activity") 
+                "Server".CreateAccount returns ("success")
+                "Client" action "Display login activity"
             #else
-                "Server".CheckIfEmailIsAlreadyUsed returns ("The email is invalid")
-                "Client".FillInRegistrationForm returns ("Display error message")
+                "Server".CheckIfEmailIsAlreadyUsed returns ("invalid")
+                "Client" action "Display error message"
             #endif
             
         #else
-            "Client".FillInRegistrationForm returns ("Display validation messages")
+            "Client" action "Display validation error messages"
         #endif
    }
 }
