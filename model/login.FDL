@@ -4,22 +4,17 @@
 
 heading "Login"
 
-"Vendor" invokes "Client".TapOnLoginButton
-"Customer" invokes "Client".TapOnLoginButton
-"Admin" invokes "Client".TapOnLoginButton
+"AnyUser" invokes "Client".TapOnLoginButton
 "Client".TapOnLoginButton returns ("Display Login screen")
 
-"Vendor" invokes "Client".FillInLoginForm
-"Customer" invokes "Client".FillInLoginForm
-"Admin" invokes "Client".FillInLoginForm
+"AnyUser" invokes "Client".FillInLoginForm
 
 "Client" action "Validate Login form"
 
 #ifdef VALID_DATA
-"Client".FillInLoginForm returns ("Valid data")
-"Vendor" invokes "Client".SubmitLoginForm(email, password)
-"Customer" invokes "Client".SubmitLoginForm(email, password)
-"Admin" invokes "Client".SubmitLoginForm(email, password)
+"Client".FillInLoginForm returns ("Valid data for AnyUser")
+
+"AnyUser" invokes "Client".SubmitLoginForm(email, password)
 "Client" invokes "Server".Login(email, password)
 "Server" action "Check credentials"
    #ifdef WRONG_CREDENTIALS

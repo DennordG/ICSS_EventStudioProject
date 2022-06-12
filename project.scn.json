@@ -11,15 +11,15 @@
   "scenarios": [
     {
       "modelPath": "model/VendorChecksFeedback.FDL",
-      "scenarioName": "Check Feedback"
+      "scenarioName": "Vendor - Check Feedback"
     },
     {
       "modelPath": "model/VendorUpdatesTimetable.FDL",
-      "scenarioName": "Update Timetable"
+      "scenarioName": "Vendor - Update Timetable"
     },
     {
       "modelPath": "model/VendorUpdatesLocation.FDL",
-      "scenarioName": "Update Location"
+      "scenarioName": "Vendor - Update Location"
     },
     {
       "modelPath": "model/login.FDL",
@@ -222,19 +222,11 @@
                                    the content of individual documents. */
   "documents": [
     {
-      "documentName": "tier1",
-      "defines": [
-        "LETTER",
-        "USE_MULTI_TIER_HEADER"      
-      ]
+      "documentName": "tier1"
     },
     {
       "documentName": "tier2",
-      "interactionLevel": "component",
-      "defines": [
-        "LETTER",
-        "USE_MULTI_TIER_HEADER"
-      ]
+      "interactionLevel": "component"
     },
     {
       "documentType": "context-diagram",

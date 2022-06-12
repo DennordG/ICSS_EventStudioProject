@@ -1,19 +1,14 @@
 #include "project-inc.FDL"
 
 {MyTheme} feature "Update timetable" {
-
-   heading "Vendor updates timetable"
-
-   "Vendor" invokes "Client"."Access profile page"
+   "Access profile page": "Vendor" -> "Client"
    "Client" invokes "Server"."RequestUserDetails"(vendorId)
-   "Server" action "Retrieves user details including timetable details"
-   "Server"."ReadTimetable" returns (userDetails)
-   "Client"."ReadTimetable" returns (userDetails)
-   "Vendor" invokes "Client"."Taps the timetable icon"
-   "Client" invokes "Vendor"."Google Maps Address input form is displayed"
-   "Vendor" invokes "Client"."Manually sets marker on map & select timeslot from dropdown list"
-   "Client" invokes "Server"."RequestAddressDetails"(markerId)
-   "Server" action "Retrieves valid address based on marker id"
-   "Server"."ReadTimetableDetails" returns (timeslotDetails)
-   "Client" invokes "Vendor"."Timeslot is updated"
+   "Server"."RequestUserDetails" returns ("User details including timetable details")
+   "Client" action "Display profile page"
+   "Taps the timetable icon": "Vendor" -> "Client"
+   "Client" action "Display Google Maps Address input form"
+   "Select address & timeslot from dropdown list": "Vendor" -> "Client"
+   "Client" invokes "Server"."UpdateTimetableDetails"(markerId)
+   "Server"."UpdateTimetableDetails" returns (successStatus)
+   "Client" action "Display update success message"
 }

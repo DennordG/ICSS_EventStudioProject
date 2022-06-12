@@ -213,7 +213,7 @@ theme MyTheme:      messageParameterFormatting = "single-parameter-per-line-left
                     sequenceDiagramHeader = SEQUENCE_DIAGRAM_HEADER,
                     displayParentInLightWeightHeader = "true",
                     blockRemarkFormatting = "left-align",
-                    assignSequenceNumbersInSequenceDiagrams = "true",
+                    assignSequenceNumbersInSequenceDiagrams = "false",
                     remarkType = REMARK_TYPE,
                     paperSize = DEFAULT_PAPER_SIZE,
                     minimizeEMFImageWidth = "false",
@@ -225,17 +225,17 @@ theme MyTheme:      messageParameterFormatting = "single-parameter-per-line-left
                     headingAndTitleFont = "Arial",
                     headingAndTitleFontSize = "8",
                     sequenceDiagramMessageNameFont = "Arial",
-                    sequenceDiagramMessageNameFontSize = "10",
+                    sequenceDiagramMessageNameFontSize = "6",
                     collaborationDiagramMessageNameFont = "Arial",
-                    collaborationDiagramMessageNameFontSize = "8",
+                    collaborationDiagramMessageNameFontSize = "6",
                     messageParameterFont = "Arial",
-                    messageParameterFontSize = "8",
+                    messageParameterFontSize = "6",
                     actionBoxFont = "Arial",
-                    actionBoxFontSize = "8",
+                    actionBoxFontSize = "6",
                     remarkFont = "Arial",
-                    remarkFontSize = "10",
+                    remarkFontSize = "6",
                     blockRemarkFont = "Arial",
-                    blockRemarkFontSize = "10"
+                    blockRemarkFontSize = "6"
 #endif
 /* === DEFAULT STYLES === */
 /* Default styles applied when a style is not specified for a statement. */
