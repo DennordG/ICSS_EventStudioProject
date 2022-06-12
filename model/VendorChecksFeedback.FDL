@@ -1,18 +1,14 @@
 #include "project-inc.FDL"
 
 {MyTheme} feature "Check feedback" {
-
-   heading "Vendor checks feedback"
-
-   "Vendor" invokes "Client"."Access profile page"
-   "Client" invokes "Server"."RequestUserDetails"(vendorId)
+   "Access profile page": "Vendor" -> "Client"
+   "Client" invokes "Server"."ReadUserDetails"(vendorId)
    "Server" action "Retrieves user details including feedback received"
    "Server"."ReadUserDetails" returns ("User details")
-   "Client"."ReadUserDetails" returns ("User details")
+   "Client" action "Displays user details including feedback received"
 
    sequence "Loops" {
-      "Vendor" invokes "Client"."Scrolls through feedback entries"
+      "Vendor" action "Scrolls through feedback entries"
       "Client" action "Displays feedback entries"
-      "Client"."ReadFeedback" returns ("Feedback entries are displayed")
    }
 }
