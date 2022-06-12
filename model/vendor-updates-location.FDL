@@ -7,8 +7,8 @@
    "Server"."RetrieveUserDetails" returns (userDetails)
    "Client" action  "Displays user details incl location"
    "Vendor" action "Taps the location icon"
-   "Client" action "Display Google Maps Address input form"
-   "Client" action "Open popup to request location access"
+   "Client" action "Displays Google Maps Address input form"
+   "Client" action "Opens popup to request location access"
 
    #ifdef GPS_PERMISSION_NOT_GRANTED
       "Vendor" action "Does not grants location access"
@@ -17,12 +17,6 @@
       "Client" invokes "Server"."RetrieveCurrentAddress"(providedLocation)
       #ifdef VALID_ADDRESS
          "Server"."RetrieveCurrentAddress" returns (validAddress)
-         "Client" action "Displays the retrieved address"
-         "Confirm that the address is ok":"Vendor"->"Client"
-         "Client" invokes "Server"."SetCurrentAddress"(validAddress)
-         "Server" action "Sets location to current address"   
-         "Server"."SetCurrentAddress" returns (successStatus)
-         "Client" action "Display update success message"
       #else
          sequence "Loops" {
             "Server"."RetrieveCurrentAddress" returns (invalidAddress)
@@ -32,23 +26,17 @@
             "Client" invokes "Server"."RetrieveCurrentAddress"(providedLocation)
          }
          "Server"."RetrieveCurrentAddress" returns (validAddress)
-         "Client" action "Displays the retrieved address"
-         "Confirm that the address is ok":"Vendor"->"Client"
-         "Client" invokes "Server"."SetCurrentAddress"(validAddress)
-         "Server" action "Sets location to current address"   
-         "Server"."SetCurrentAddress" returns (successStatus)
-         "Client" action "Display update success message"    
       #endif
    #else   
       "Vendor" action "Grants location access"
       "Vendor" action "Taps the current location icon"
       "Client" invokes "Server"."RetrieveCurrentAddress"(currentLocation)
       "Server"."RetrieveCurrentAddress" returns (validAddress)
-      "Client" action "Displays the retrieved address"
-      "Confirm that the address is ok":"Vendor"->"Client"
-      "Client" invokes "Server"."SetCurrentAddress"(validAddress)
-      "Server" action "Sets location to current address"   
-      "Server"."SetCurrentAddress" returns (successStatus)
-      "Client" action "Display update success message"
    #endif
+   "Client" action "Displays the retrieved address"
+   "Confirms that the address is ok":"Vendor"->"Client"
+   "Client" invokes "Server"."SetCurrentAddress"(validAddress)
+   "Server" action "Sets location to current address"   
+   "Server"."SetCurrentAddress" returns (successStatus)
+   "Client" action "Displays update success message"
 }
