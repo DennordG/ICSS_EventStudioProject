@@ -2,32 +2,28 @@
 
 {MyTheme} feature "Register as Vendor" {
 
-heading "Register as Vendor"
-
-"Vendor" invokes "Client".TapOnRegisterAsVendorButton
-"Client".TapOnRegisterAsVendorButton returns ("Display Register as Vendor screen")
-"Vendor" invokes "Client".FillInRegistrationForm
-
+"Tap on Register as Vendor button": "Vendor" -> "Client"
+"Client" action "Display Register as Vendor screen"
+"Fill in the registration form": "Vendor" -> "Client"
 "Client" action "Validate input data"
 
 #ifdef VALID_DATA
-   "Client" invokes "Server".CheckEmailUniqueness
+   "Client" invokes "Server".CheckEmailUniqueness(email)
    "Server" action "Check email uniqueness"
    #ifdef UNIQUE_EMAIL
-      "Server".CheckEmailUniqueness returns ("Unique email")
-      "Client" invokes "Server".RegisterAsVendor(registration_details)
+      "Server".CheckEmailUniqueness returns ("uniqueEmail")
+      "Valid data": "Client" -> "Vendor"
+      "Submit registration details": "Vendor" -> "Client"
+      "Client" invokes "Server".RegisterAsVendor(registrationDetails)
       "Server" action "Create vendor account with pending status"
-      NotifyAdmin : Server -> Admin
-      % Notify Admin to review the new registration request
-      "Server"."RegisterVendor" returns ("Created vendor account with pending status")
-      NotifyVendor: Client -> Vendor
-      % Wait for admin to approve the registration request
-      "Client".RegisterAsVendor returns ("Wait for Admin's decision")
+      "Server" action "Notify Admin to review the new registration request"
+      "Server"."RegisterVendor" returns ("createdVendorAccountWithPendingStatus")
+      "Client" action "Inform Vendor to wait for Admin's decision"
    #else
-         "Server".CheckEmailUniqueness returns ("Duplicate email")
-         "Client".FillInRegistrationForm returns ("Display duplicate email error message")
+         "Server".CheckEmailUniqueness returns ("duplicateEmail")
+         "Client" action "Display duplicate email error message"
    #endif   
 #else
-   "Client".FillInRegistrationForm returns ("Display validation errors")
+   "Client" action "Display validation errors"
 #endif
 }

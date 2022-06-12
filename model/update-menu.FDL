@@ -2,28 +2,27 @@
 
 {MyTheme} feature "Update menu" {
 
-heading "Update menu"
-
-"Vendor" invokes "Client".TapOnUpdateMenuButton
-"Client".TapOnUpdateMenuButton returns ("Display Update menu screen")
-"Vendor" invokes "Client".TapOnPencilIconToEditMenu
-"Client".TapOnPencilIconToEditMenu returns ("Current menu becomes editable")
-"Vendor" invokes "Client".EditTextArea
+"Tap on Update menu button": "Vendor" -> "Client"
+"Client" action "Display current menu"
+"Tap on pencil icon": "Vendor" -> "Client"
+"Client" action "Current menu becomes editable"
+"Edit text area": "Vendor" -> "Client"
 "Client" action "Validate text area"
 
 #ifdef VALID_DATA
-   "Client".EditTextArea returns ("Valid data")
+   "Valid data": "Client" -> "Vendor"
    "Client" action "Save button is enabled"
    #ifdef SAVE_CHANGES
-      "Vendor" invokes "Client".SaveMenu(updatedMenu)
+      "Tap on Save button": "Vendor" -> "Client"
       "Client" invokes "Server".SaveMenu(updatedMenu)
-      "Server".SaveMenu returns ("Menu has been successfully updated")
-      "Client".SaveMenu returns ("Form becomes non-editable & menu is updated")
+      "Client" action "Form becomes non-editable"
+      "Server".SaveMenu returns ("success")
+      "Client" action "Menu is updated"
    #else
-      "Vendor" invokes "Client".DiscardChanges(updatedMenu)
-      "Client".DiscardChanges returns ("Discarded changes & form becomes non-editable")
+      "Tap on Cancel": "Vendor" -> "Client"
+      "Client" action "Cancel changes & form becomes non-editable"
    #endif
 #else
-   "Client".EditTextArea returns ("Display validation errors")
+   "Client" action "Display validation errors"
 #endif
 }

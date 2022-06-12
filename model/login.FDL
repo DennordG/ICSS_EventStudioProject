@@ -2,29 +2,24 @@
 
 {MyTheme} feature "Login" {
 
-heading "Login"
-
-"AnyUser" invokes "Client".TapOnLoginButton
-"Client".TapOnLoginButton returns ("Display Login screen")
-
-"AnyUser" invokes "Client".FillInLoginForm
-
+"Tap on Login button": "AnyUser" -> "Client"
+"Client" action "Display Login screen"
+"Fill in login form": "AnyUser" -> "Client"
 "Client" action "Validate Login form"
 
 #ifdef VALID_DATA
-"Client".FillInLoginForm returns ("Valid data for AnyUser")
-
-"AnyUser" invokes "Client".SubmitLoginForm(email, password)
-"Client" invokes "Server".Login(email, password)
-"Server" action "Check credentials"
+   "Valid data": "Client" -> "AnyUser"
+   "Submit form": "AnyUser" -> "Client"
+   "Client" invokes "Server".Login(email, password)
+   "Server" action "Check credentials"
    #ifdef WRONG_CREDENTIALS
-      "Server".Login returns ("Failed login")
-      "Client".SubmitLoginForm returns ("Display failed login error message")
+      "Server".Login returns ("failedLogin")
+      "Client" action "Display failed login error message"
    #else 
-   "Server".Login returns ("User was successfully authenticated")
-   "Client".SubmitLoginForm returns ("Show home screen for each type of user")
+   "Server".Login returns ("success")
+   "Client" action "Display home screen for each type of user"
    #endif
 #else
-   "Client".FillInLoginForm returns ("Display validation errors")
+   "Client" action "Display validation errors"
 #endif
 }

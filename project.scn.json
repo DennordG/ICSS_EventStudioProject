@@ -23,26 +23,26 @@
     },
     {
       "modelPath": "model/login.FDL",
-      "scenarioName": "Login flow - valid data & correct credentials",
+      "scenarioName": "Login - valid data, correct credentials",
       "defines": ["VALID_DATA"]
     },
     {
       "modelPath": "model/login.FDL",
-      "scenarioName": "Login flow - valid data & wrong credentials",
+      "scenarioName": "Login - valid data, wrong credentials",
       "defines": ["VALID_DATA", "WRONG_CREDENTIALS"]
     },
     {
       "modelPath": "model/login.FDL",
-      "scenarioName": "Login flow - invalid data"
+      "scenarioName": "Login - invalid data"
     },
     {
       "modelPath": "model/register-as-vendor.FDL",
-      "scenarioName": "Register as vendor - valid data & duplicate email",
+      "scenarioName": "Register as vendor - valid data, duplicate email",
       "defines": ["VALID_DATA"]
     },
     {
       "modelPath": "model/register-as-vendor.FDL",
-      "scenarioName": "Register as vendor - valid data & unique email",
+      "scenarioName": "Register as vendor - valid data, unique email",
       "defines": ["vALID_DATA", "UNIQUE_EMAIL"]
     },
     {
@@ -51,12 +51,12 @@
     },
     {
       "modelPath": "model/update-menu.FDL",
-      "scenarioName": "Update menu - Valid data, Vendor discards changes",
+      "scenarioName": "Update menu - valid data, vendor discards changes",
       "defines": ["VALID_DATA"]
     },
     {
       "modelPath": "model/update-menu.FDL",
-      "scenarioName": "Update menu - Valid data, Vendor saves updated menu",
+      "scenarioName": "Update menu - valid data, vendor saves updated menu",
       "defines": ["VALID_DATA",
                   "SAVE_CHANGES"]
     },
