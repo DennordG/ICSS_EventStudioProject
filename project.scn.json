@@ -10,16 +10,27 @@
                                    flow specific to this scenario.*/
   "scenarios": [
     {
-      "modelPath": "model/VendorChecksFeedback.FDL",
+      "modelPath": "model/vendor-checks-feedback.FDL",
       "scenarioName": "Vendor - Check Feedback"
     },
     {
-      "modelPath": "model/VendorUpdatesTimetable.FDL",
+      "modelPath": "model/vendor-updates-timetable.FDL",
       "scenarioName": "Vendor - Update Timetable"
     },
     {
-      "modelPath": "model/VendorUpdatesLocation.FDL",
-      "scenarioName": "Vendor - Update Location"
+      "modelPath": "model/vendor-updates-location.FDL",
+      "scenarioName": "Vendor - Update Location - GPS permission granted",
+      "defines": ["GPS_PERMISSION_GRANTED"]
+    },
+    {
+      "modelPath": "model/vendor-updates-location.FDL",
+      "scenarioName": "Vendor - Update Location - GPS permission not granted - Valid Address",
+      "defines": ["GPS_PERMISSION_NOT_GRANTED","VALID_ADDRESS"]
+    },
+    {
+      "modelPath": "model/vendor-updates-location.FDL",
+      "scenarioName": "Vendor - Update Location - GPS permission not granted - Valid Address",
+      "defines": ["GPS_PERMISSION_NOT_GRANTED","INVALID_ADDRESS"]
     },
     {
       "modelPath": "model/login.FDL",
