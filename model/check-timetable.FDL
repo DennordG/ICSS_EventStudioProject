@@ -3,12 +3,23 @@
 {MyTheme} feature "Check daily timetable" {
     sequence "Setting the location"{
         "Taps on search icon": "Customer" -> "Client"
-        "Client" action "Setting up the location"
+        |=
+            Setting the location by granting the location permission and using the GPS / manually updating the location / 
+            the location permission has been already given and the GPS will be used to set up the location
+        =|
+        "Client" action "Setting up the location (GPS or manually)"
     }
    
-    "Client" invokes "Server".SearchFoodTrucks(address)
-    "Server".SearchFoodTrucks returns ("foodTrucksArray")
-    "Client" action "Refresh map"
+   
+    sequence "Search food trucks"{
+        |=
+            A simplified version of the search feature - the search operation can be performed based on area or based on 
+            area and search string (as presented in the "Search food trucks" scenarios)
+        =|
+        "Client" invokes "Server".SearchFoodTrucks(address, searchString) % the search string is optional
+        "Server".SearchFoodTrucks returns ("foodTrucksArray")
+        "Client" action "Display the results on the map"
+    }
 
     "Taps on marker": "Customer" -> "Client"
     "Client" invokes "Server".GetFoodTruckData(foodTruckId)
@@ -24,6 +35,8 @@
         "Client" invokes "Server".FetchTimetableElementInfo(timetableId)
         "Server".FetchTimetableElementInfo returns ("timetableData")
         "Client" action "Display the timetable information (time and address)"
+        "Taps on the map/close button": "Customer" -> "Client"
+        "Client" action "The popup will be closed"
     #else
         "Server".FetchTimetableInfo returns ("noResults")
         "Client" action "Show a warning message"
