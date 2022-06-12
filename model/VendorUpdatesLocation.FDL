@@ -1,6 +1,6 @@
 #include "project-inc.FDL"
 
-{MyTheme} feature "Message interactions" {
+{MyTheme} feature "Update Location" {
 
    heading "Vendor updates location"
 

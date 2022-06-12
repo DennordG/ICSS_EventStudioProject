@@ -11,15 +11,15 @@
   "scenarios": [
     {
       "modelPath": "model/VendorChecksFeedback.FDL",
-      "scenarioName": "Message interaction - basics"
+      "scenarioName": "Check Feedback"
     },
     {
       "modelPath": "model/VendorUpdatesTimetable.FDL",
-      "scenarioName": "Message interaction - basics"
+      "scenarioName": "Update Timetable"
     },
     {
       "modelPath": "model/VendorUpdatesLocation.FDL",
-      "scenarioName": "Message interaction - basics"
+      "scenarioName": "Update Location"
     },
     {
       "modelPath": "model/login.FDL",
