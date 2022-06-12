@@ -22,11 +22,11 @@
     "Client" invokes "Server".SearchFoodTrucks(address)
     
     #ifdef AREA_SEARCH_RESULTS
-        "Server".RequestFoodTrucks returns ("foodTrucksArray")
+        "Server".RequestFoodTrucks returns ("foodTrucks")
         "Client" action "Display the results on the map"
         #define SEARCH_RESULTS true
     #else
-        "Server".RequestFoodTrucks returns ("noResults")
+        "Server".RequestFoodTrucks returns ("null")
         "Client" action "Show no results message"
     #endif /* AREA_SEARCH_RESULTS */
    
@@ -37,11 +37,11 @@
             "Server" action "Search food trucks based on area and search string"
             
             #ifdef SEARCH_STRING_RESULTS
-                "Server".SearchFoodTrucks returns ("foodTrucksArray")
+                "Server".SearchFoodTrucks returns ("foodTrucks")
                 "Client" action "Display the results (the map is being refreshed)"
                 #define SEARCH_RESULTS true
             #else
-                "Server".SearchFoodTrucks returns ("noResults")
+                "Server".SearchFoodTrucks returns ("null")
                 "Client" action "Show no results message"
                 #undef SEARCH_RESULTS
             #endif

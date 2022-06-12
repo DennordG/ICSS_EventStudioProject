@@ -17,7 +17,7 @@
             area and search string (as presented in the "Search food trucks" scenarios)
         =|
         "Client" invokes "Server".SearchFoodTrucks(address, searchString) % the search string is optional
-        "Server".SearchFoodTrucks returns ("foodTrucksArray")
+        "Server".SearchFoodTrucks returns ("foodTrucks")
         "Client" action "Display the results on the map"
     }
 
@@ -29,7 +29,7 @@
     "Taps on view timetable option": "Customer" -> "Client"
     "Client" invokes "Server".FetchTimetableInfo(foodTruckId)
     #ifdef TIMETABLE
-        "Server".FetchTimetableInfo returns ("timetableComponentsArray")
+        "Server".FetchTimetableInfo returns ("timetableComponents")
         "Client" action "Display the timetable map"
         "Taps on timetable marker": "Customer" -> "Client"
         "Client" invokes "Server".FetchTimetableElementInfo(timetableId)
@@ -38,7 +38,7 @@
         "Taps on the map/close button": "Customer" -> "Client"
         "Client" action "The popup will be closed"
     #else
-        "Server".FetchTimetableInfo returns ("noResults")
+        "Server".FetchTimetableInfo returns ("null")
         "Client" action "Show a warning message"
     #endif
 }
