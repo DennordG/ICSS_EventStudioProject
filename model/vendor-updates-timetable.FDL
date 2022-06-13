@@ -3,7 +3,7 @@
 {MyTheme} feature "Update timetable" {
    "Access profile page": "Vendor" -> "Client"
    "Client" invokes "Server"."RequestUserDetails"(vendorId)
-   "Server"."RequestUserDetails" returns ("User details including timetable details")
+   "Server"."RequestUserDetails" returns (userDetailsIncludingTimetableDetails)
    "Client" action "Display profile page"
    "Taps the timetable icon": "Vendor" -> "Client"
    "Client" action "Display Google Maps Address input form"

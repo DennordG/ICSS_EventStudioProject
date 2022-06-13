@@ -6,14 +6,14 @@
    "Server" action "Retrieves user details including location details"
    "Server"."RetrieveUserDetails" returns (userDetails)
    "Client" action  "Displays user details incl location"
-   "Vendor" action "Taps the location icon"
+   "Taps the location icon": "Vendor"->"Client"
    "Client" action "Displays Google Maps Address input form"
    "Client" action "Opens popup to request location access"
 
    #ifdef GPS_PERMISSION_NOT_GRANTED
-      "Vendor" action "Does not grants location access"
+      "Does not grants location access":  "Vendor"->"Client"
       "Client" action "Displays text input for address details"
-      "Vendor" action "Manually types an address"
+      "Manually types an address":  "Vendor"->"Client"
       "Client" invokes "Server"."RetrieveCurrentAddress"(providedLocation)
       #ifdef VALID_ADDRESS
          "Server"."RetrieveCurrentAddress" returns (validAddress)
@@ -22,14 +22,14 @@
             "Server"."RetrieveCurrentAddress" returns (invalidAddress)
             "Client" action "Advises the user that the provided address is incorrect"
             "Client" action "Displays text input for address details"
-            "Vendor" action "Manually types an address"
+            "Manually types an address":  "Vendor"->"Client"
             "Client" invokes "Server"."RetrieveCurrentAddress"(providedLocation)
          }
          "Server"."RetrieveCurrentAddress" returns (validAddress)
       #endif
    #else   
-      "Vendor" action "Grants location access"
-      "Vendor" action "Taps the current location icon"
+      "Grants location access":  "Vendor"->"Client"
+      "Taps the current location icon":  "Vendor"->"Client"
       "Client" invokes "Server"."RetrieveCurrentAddress"(currentLocation)
       "Server"."RetrieveCurrentAddress" returns (validAddress)
    #endif
