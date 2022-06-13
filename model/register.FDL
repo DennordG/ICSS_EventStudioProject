@@ -8,15 +8,15 @@
     "Client" action "Validate the input data"
     
     #ifdef VALID_DATA
-        "Client" invokes "Server".CheckIfEmailIsAlreadyUsed(email)
+        "Client" invokes "Server".CheckEmailUniqueness(email)
         #ifdef VALID_EMAIL
-            "Server".CheckIfEmailIsAlreadyUsed returns ("valid")
+            "Server".CheckEmailUniqueness returns ("true")
 
             "Client" invokes "Server".CreateAccount(accountInformation)
             "Server".CreateAccount returns ("success")
             "Client" action "Display login activity"
         #else
-            "Server".CheckIfEmailIsAlreadyUsed returns ("invalid")
+            "Server".CheckEmailUniqueness returns ("false")
             "Client" action "Show error message"
         #endif
 
