@@ -2,28 +2,27 @@
 
 {MyTheme} feature "Register as Vendor" {
 
-"Tap on Register as Vendor button": "Vendor" -> "Client"
-"Client" action "Display Register as Vendor screen"
-"Fill in the registration form": "Vendor" -> "Client"
-"Client" action "Validate input data"
+"Taps on Register as Vendor button": "Vendor" -> "Client"
+"Client" action "Displays Register as Vendor screen"
+"Fills in the registration form": "Vendor" -> "Client"
+"Client" action "Validates input data"
 
 #ifdef VALID_DATA
    "Client" invokes "Server".CheckEmailUniqueness(email)
-   "Server" action "Check email uniqueness"
+   "Server" action "Checks email uniqueness"
    #ifdef UNIQUE_EMAIL
-      "Server".CheckEmailUniqueness returns ("uniqueEmail")
-      "Valid data": "Client" -> "Vendor"
-      "Submit registration details": "Vendor" -> "Client"
+      "Server".CheckEmailUniqueness returns ("true")
+      "Submits registration details": "Vendor" -> "Client"
       "Client" invokes "Server".RegisterAsVendor(registrationDetails)
-      "Server" action "Create vendor account with pending status"
-      "Server" action "Notify Admin to review the new registration request"
+      "Server" action "Creates vendor account with pending status"
+      "Server" action "Notifies Admin to review the new registration request"
       "Server"."RegisterVendor" returns ("createdVendorAccountWithPendingStatus")
-      "Client" action "Inform Vendor to wait for Admin's decision"
+      "Client" action "Informs Vendor to wait for Admin's decision"
    #else
-         "Server".CheckEmailUniqueness returns ("duplicateEmail")
-         "Client" action "Display duplicate email error message"
+         "Server".CheckEmailUniqueness returns ("false")
+         "Client" action "Displays duplicate email error message"
    #endif   
 #else
-   "Client" action "Display validation errors"
+   "Client" action "Displays validation errors"
 #endif
 }

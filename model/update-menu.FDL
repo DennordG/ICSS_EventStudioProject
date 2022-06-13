@@ -2,27 +2,26 @@
 
 {MyTheme} feature "Update menu" {
 
-"Tap on Update menu button": "Vendor" -> "Client"
-"Client" action "Display current menu"
-"Tap on pencil icon": "Vendor" -> "Client"
+"Taps on Update menu button": "Vendor" -> "Client"
+"Client" action "Displays current menu"
+"Taps on pencil icon": "Vendor" -> "Client"
 "Client" action "Current menu becomes editable"
-"Edit text area": "Vendor" -> "Client"
-"Client" action "Validate text area"
+"Edits text area": "Vendor" -> "Client"
+"Client" action "Validates text area"
 
 #ifdef VALID_DATA
-   "Valid data": "Client" -> "Vendor"
    "Client" action "Save button is enabled"
    #ifdef SAVE_CHANGES
-      "Tap on Save button": "Vendor" -> "Client"
+      "Taps on Save button": "Vendor" -> "Client"
       "Client" invokes "Server".SaveMenu(updatedMenu)
       "Client" action "Form becomes non-editable"
       "Server".SaveMenu returns ("success")
       "Client" action "Menu is updated"
    #else
       "Tap on Cancel": "Vendor" -> "Client"
-      "Client" action "Cancel changes & form becomes non-editable"
+      "Client" action "Cancels changes & form becomes non-editable"
    #endif
 #else
-   "Client" action "Display validation errors"
+   "Client" action "Displays validation errors"
 #endif
 }
