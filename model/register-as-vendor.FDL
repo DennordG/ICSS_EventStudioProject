@@ -16,7 +16,7 @@
       "Client" invokes "Server".RegisterAsVendor(registrationDetails)
       "Server" action "Creates vendor account with pending status"
       "Server" action "Notifies Admin to review the new registration request"
-      "Server"."RegisterVendor" returns ("createdVendorAccountWithPendingStatus")
+      "Server"."RegisterVendor" returns ("success")
       "Client" action "Informs Vendor to wait for Admin's decision"
    #else
          "Server".CheckEmailUniqueness returns ("false")

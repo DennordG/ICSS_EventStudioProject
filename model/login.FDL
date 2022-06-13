@@ -2,13 +2,13 @@
 
 {MyTheme} feature "Login" {
 
-"Taps on Login button": "AnyUser" -> "Client"
+"Taps on Login button": "Any User" -> "Client"
 "Client" action "Displays Login screen"
-"Fills in login form": "AnyUser" -> "Client"
+"Fills in login form": "Any User" -> "Client"
 "Client" action "Validates Login form"
 
 #ifdef VALID_DATA
-   "Submits form": "AnyUser" -> "Client"
+   "Submits form": "Any User" -> "Client"
    "Client" invokes "Server".Login(email, password)
    "Server" action "Checks credentials"
    #ifdef WRONG_CREDENTIALS

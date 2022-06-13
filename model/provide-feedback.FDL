@@ -34,11 +34,12 @@
 	"Client" action "Display a popup with the data"
 	"Taps on provide feedback option": "Customer" -> "Client"
 	"Client" action "Display a new feedback form"
-	"Fills in the feedback form and presses the submit button": "Customer" -> "Client"
+	"Fills in the feedback form": "Customer" -> "Client"
 	"Client" action "Validates form"
 
 	#ifdef VALID_FORM
-		"Client" invokes "Server".SendFeedback(customerId, formDetails)
+		"Presses the submit button": "Customer" -> "Client"
+		"Client" invokes "Server".SendFeedback(customerId, vendorId, formDetails)
 		"Server".SendFeedback returns (success)
 		"Client" action "Inform the customer that the feedback message was sent successfully"
 	#else

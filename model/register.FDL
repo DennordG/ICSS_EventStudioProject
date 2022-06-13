@@ -11,13 +11,14 @@
         "Client" invokes "Server".CheckEmailUniqueness(email)
         #ifdef VALID_EMAIL
             "Server".CheckEmailUniqueness returns ("true")
-
+            
+            "Submits registration details": "Customer" -> "Client"
             "Client" invokes "Server".CreateAccount(accountInformation)
             "Server".CreateAccount returns ("success")
             "Client" action "Display login activity"
         #else
             "Server".CheckEmailUniqueness returns ("false")
-            "Client" action "Show error message"
+            "Client" action "Show duplicate email message"
         #endif
 
     #else

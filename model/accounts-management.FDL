@@ -1,21 +1,25 @@
 #include "project-inc.FDL"
 
-{MyTheme} feature "Authorize vendor accounts" {
+{MyTheme} feature "Manage accounts" {
     "Access accounts management": "Admin" -> "Client"
-    "Client" invokes "Server"."GetAllAccounts"
-    "Server"."GetAllAccounts" returns ("List of accounts")
+    "Client" invokes "Server".GetAllAccounts
+    "Server".GetAllAccounts returns ("accounts")
     "Client" action "Displays list of accounts"
  
-    sequence "Manage accounts" {
+    loop "Manage accounts" {
        "Admin" action "Check account activity"
-       "Take action": "Admin" -> "Client"
-       "Client" invokes "Server"."ManageAccount"
+       "Select account": "Admin" -> "Client"
+       "Client" action "Open selected account details"
 
       #ifdef DEACTIVATED
-         "Server".ManageAccount returns ("Account activated")
+         "Tap to deactivate account": "Admin" -> "Client"
+         "Client" invokes "Server".DeactivateAccount(accountId)
+         "Server".DeactivateAccount returns ("success")
          "Client" action "Update list - account marked as activated"
       #else
-         "Server".ManageAccount returns ("Account deactivated")
+         "Tap to activate account": "Admin" -> "Client"
+         "Client" invokes "Server".ActivateAccount(accountId)
+         "Server".ActivateAccount returns ("success")
          "Client" action "Update list - account marked as deactivated"
       #endif
     }

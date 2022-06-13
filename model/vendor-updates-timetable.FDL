@@ -3,12 +3,12 @@
 {MyTheme} feature "Update timetable" {
    "Access profile page": "Vendor" -> "Client"
    "Client" invokes "Server"."RequestUserDetails"(vendorId)
-   "Server"."RequestUserDetails" returns (userDetailsIncludingTimetableDetails)
+   "Server"."RequestUserDetails" returns (userDetails)
    "Client" action "Display profile page"
    "Taps the timetable icon": "Vendor" -> "Client"
    "Client" action "Display Google Maps Address input form"
    "Select address & timeslot from dropdown list": "Vendor" -> "Client"
    "Client" invokes "Server"."UpdateTimetableDetails"(markerId)
-   "Server"."UpdateTimetableDetails" returns (successStatus)
+   "Server"."UpdateTimetableDetails" returns (success)
    "Client" action "Display update success message"
 }

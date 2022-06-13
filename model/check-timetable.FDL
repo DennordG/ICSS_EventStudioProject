@@ -44,6 +44,6 @@
         "Client" action "The popup will be closed"
     #else
         "Server".FetchTimetableInfo returns ("null")
-        "Client" action "Show a warning message"
+        "Client" action "Show missing timetable message"
     #endif
 }

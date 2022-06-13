@@ -2,5 +2,5 @@ module: "Foodder"
 
 component: [_user] "Users" in "Foodder", "Application" in "Foodder"
 
-eternal: "Vendor" in "Users", "Customer" in "Users", "Admin" in "Users", "AnyUser" in "Users"
+eternal: "Vendor" in "Users", "Customer" in "Users", "Admin" in "Users", "Any User" in "Users"
 eternal: [_client] "Client" in "Application", [_server] "Server" in "Application"

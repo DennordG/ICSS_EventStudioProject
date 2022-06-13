@@ -7,7 +7,7 @@
    "Server"."ReadUserDetails" returns ("User details")
    "Client" action "Displays user details including feedback received"
 
-   sequence "Loops" {
+   loop "Check feedback" {
       "Vendor" action "Scrolls through feedback entries"
       "Client" action "Displays feedback entries"
    }

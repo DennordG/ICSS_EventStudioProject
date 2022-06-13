@@ -2,19 +2,20 @@
 
 {MyTheme} feature "Authorize vendor accounts" {
    "Access pending approvals": "Admin" -> "Client"
-   "Client" invokes "Server"."SearchRequests"
-   "Server"."SearchRequests" returns ("List of requests")
+   "Client" invokes "Server"."GetPendingVendorRequests"
+   "Server"."GetPendingVendorRequests" returns ("pendingVendorRequests")
    "Client" action "Displays list of pending approvals"
  
    sequence "Checking requests" {
       "Admin" action "Check vendor's documents"
-      "Client" invokes "Server"."AcceptRequest"
       
       #ifdef ACCEPT
-         "Server".AcceptRequest returns ("Vendor's account is authorized")
+         "Client" invokes "Server".AcceptRequest(vendorId, requestId)
+         "Server".AcceptRequest returns ("success")
          "Client" action "Update list"
       #else
-         "Server".AcceptRequest returns ("Vendor's account not authorized")
+         "Client" invokes "Server".DeclineRequest(vendorId, requestId)
+         "Server".DeclineRequest returns ("success")
       #endif
    }
 }

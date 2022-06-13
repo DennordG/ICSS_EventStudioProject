@@ -36,6 +36,6 @@
 		"Client" action "Display the menu"
 	#else
 		"Server".FetchMenuInfo returns ("null")
-		"Client" action "Show a warning message"
+		"Client" action "Show missing menu message"
 	#endif
 }

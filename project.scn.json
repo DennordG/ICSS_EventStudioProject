@@ -1,37 +1,5 @@
 {
-  /* Specify the scenarios to be included in the project
-  A scenario is defined with:
-  
-  "modelPath"                      FDL file that defines the model.
-
-  "scenarioName"                   A title that summarizes the scenario
-  
-  "defines"                        Preprocessor defines that select the
-                                   flow specific to this scenario.*/
   "scenarios": [
-    {
-      "modelPath": "model/vendor-checks-feedback.FDL",
-      "scenarioName": "Vendor - Check Feedback"
-    },
-    {
-      "modelPath": "model/vendor-updates-timetable.FDL",
-      "scenarioName": "Vendor - Update Timetable"
-    },
-    {
-      "modelPath": "model/vendor-updates-location.FDL",
-      "scenarioName": "Vendor - Update Location - GPS permission granted",
-      "defines": ["GPS_PERMISSION_GRANTED"]
-    },
-    {
-      "modelPath": "model/vendor-updates-location.FDL",
-      "scenarioName": "Vendor - Update Location - GPS permission not granted - Valid Address",
-      "defines": ["GPS_PERMISSION_NOT_GRANTED","VALID_ADDRESS"]
-    },
-    {
-      "modelPath": "model/vendor-updates-location.FDL",
-      "scenarioName": "Vendor - Update Location - GPS permission not granted - Valid Address",
-      "defines": ["GPS_PERMISSION_NOT_GRANTED","INVALID_ADDRESS"]
-    },
     {
       "modelPath": "model/login.FDL",
       "scenarioName": "Login - valid data, correct credentials",
@@ -47,154 +15,18 @@
       "scenarioName": "Login - invalid data"
     },
     {
-      "modelPath": "model/register-as-vendor.FDL",
-      "scenarioName": "Register as vendor - valid data, duplicate email",
+      "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - invalid data"
+    },
+    {
+      "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - valid data, invalid email address",
       "defines": ["VALID_DATA"]
     },
     {
-      "modelPath": "model/register-as-vendor.FDL",
-      "scenarioName": "Register as vendor - valid data, unique email",
-      "defines": ["vALID_DATA", "UNIQUE_EMAIL"]
-    },
-    {
-      "modelPath": "model/register-as-vendor.FDL",
-      "scenarioName": "Register as vendor - invalid data"
-    },
-    {
-      "modelPath": "model/update-menu.FDL",
-      "scenarioName": "Update menu - valid data, vendor discards changes",
-      "defines": ["VALID_DATA"]
-    },
-    {
-      "modelPath": "model/update-menu.FDL",
-      "scenarioName": "Update menu - valid data, vendor saves updated menu",
-      "defines": ["VALID_DATA",
-                  "SAVE_CHANGES"]
-    },
-    {
-      "modelPath": "model/update-menu.FDL",
-      "scenarioName": "Update menu - Invalid data"
-    },
-    {
-      // search without results for the provided area
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - GPS location & no search results based on area",
-      "defines": [
-        "GPS_LOCATION"
-      ]
-    },
-    {
-      // search with results for the provided area
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - GPS location & one or more search results based on area",
-      "defines": [
-        "GPS_LOCATION",
-        "AREA_SEARCH_RESULTS"
-      ]
-    },
-    {
-      // search with results for the provided area
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - GPS location & no search results based on search string",
-      "defines": [
-        "GPS_LOCATION",
-        "AREA_SEARCH_RESULTS",
-        "SEARCH"
-      ]
-    },
-    {
-      // search with results for the provided area
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - GPS location & one or more search results based on area and search string",
-      "defines": [
-        "GPS_LOCATION",
-        "AREA_SEARCH_RESULTS",
-        "SEARCH",
-        "SEARCH_RESULTS"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - manually updating the GPS location (without search results)"
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - manually updating the GPS location & area search results",
-      "defines": [
-        "AREA_SEARCH_RESULTS"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - manually updating the GPS location & no results based on search string",
-      "defines": [
-        "AREA_SEARCH_RESULTS",
-        "SEARCH"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - manually updating the GPS location & area and search string results",
-      "defines": [
-        "AREA_SEARCH_RESULTS",
-        "SEARCH",
-        "SEARCH_RESULTS"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - granted location permission & no results",
-      "defines": [
-        "GRANTED_GPS_PERMISSION"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - granted location permission & area search results",
-      "defines": [
-        "GRANTED_GPS_PERMISSION",
-        "AREA_SEARCH_RESULTS"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - granted location permission & no results based on search string",
-      "defines": [
-        "GRANTED_GPS_PERMISSION",
-        "AREA_SEARCH_RESULTS",
-        "SEARCH"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - granted location permission & area and search string results",
-      "defines": [
-        "GRANTED_GPS_PERMISSION",
-        "AREA_SEARCH_RESULTS",
-        "SEARCH",
-        "SEARCH_RESULTS"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - granted location permission & area and filters applied without results",
-      "defines": [
-        "GRANTED_GPS_PERMISSION",
-        "AREA_SEARCH_RESULTS",
-        "SEARCH",
-        "FILTER"
-      ]
-    },
-    {
-      "modelPath": "model/search.FDL",
-      "scenarioName": "Search food trucks - granted location permission & area and filters applied with results",
-      "defines": [
-        "GRANTED_GPS_PERMISSION",
-        "AREA_SEARCH_RESULTS",
-        "SEARCH",
-        "FILTER",
-        "SEARCH_RESULTS"
-      ]
+      "modelPath": "model/register.FDL",
+      "scenarioName": "Customer registration - valid data and the account is successfully created",
+      "defines": ["VALID_DATA", "VALID_EMAIL"]
     },
     {
       "modelPath": "model/check-timetable.FDL",
@@ -203,32 +35,80 @@
     {
       "modelPath": "model/check-timetable.FDL",
       "scenarioName": "Check timetable - the timetable has been provided",
-      "defines": [
-        "TIMETABLE"
-      ]
+      "defines": ["TIMETABLE"]
     },
     {
-      "modelPath": "model/register.FDL",
-      "scenarioName": "Customer registration - invalid data"
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & no search results based on area",
+      "defines": ["GPS_LOCATION"]
     },
     {
-      "modelPath": "model/register.FDL",
-      "scenarioName": "Customer registration - valid data, invalid email address",
-      "defines": [
-        "VALID_DATA"
-      ]
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & one or more search results based on area",
+      "defines": ["GPS_LOCATION", "AREA_SEARCH_RESULTS"]
     },
     {
-      "modelPath": "model/register.FDL",
-      "scenarioName": "Customer registration - valid data and the account is successfully created",
-      "defines": [
-        "VALID_DATA",
-        "VALID_EMAIL"
-      ]
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & no search results based on search string",
+      "defines": ["GPS_LOCATION", "AREA_SEARCH_RESULTS", "SEARCH"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - GPS location & one or more search results based on area and search string",
+      "defines": ["GPS_LOCATION", "AREA_SEARCH_RESULTS", "SEARCH", "SEARCH_RESULTS"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location (without search results)"
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location & area search results",
+      "defines": ["AREA_SEARCH_RESULTS"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location & no results based on search string",
+      "defines": ["AREA_SEARCH_RESULTS", "SEARCH"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - manually updating the GPS location & area and search string results",
+      "defines": ["AREA_SEARCH_RESULTS", "SEARCH", "SEARCH_RESULTS"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & no results",
+      "defines": ["GRANTED_GPS_PERMISSION"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & area search results",
+      "defines": ["GRANTED_GPS_PERMISSION", "AREA_SEARCH_RESULTS"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & no results based on search string",
+      "defines": ["GRANTED_GPS_PERMISSION", "AREA_SEARCH_RESULTS", "SEARCH"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & area and search string results",
+      "defines": ["GRANTED_GPS_PERMISSION", "AREA_SEARCH_RESULTS", "SEARCH", "SEARCH_RESULTS"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & area and filters applied without results",
+      "defines": ["GRANTED_GPS_PERMISSION", "AREA_SEARCH_RESULTS", "SEARCH", "FILTER"]
+    },
+    {
+      "modelPath": "model/search.FDL",
+      "scenarioName": "Search food trucks - granted location permission & area and filters applied with results",
+      "defines": ["GRANTED_GPS_PERMISSION", "AREA_SEARCH_RESULTS", "SEARCH", "FILTER", "SEARCH_RESULTS"]
     },
     {
       "modelPath": "model/see-menu.FDL",
-      "scenarioName": "See menu - no menu"
+      "scenarioName": "See menu - missing menu"
     },
     {
       "modelPath": "model/see-menu.FDL",
@@ -245,13 +125,55 @@
       "defines": ["VALID_FORM"]
     },
     {
-      "modelPath": "model/accounts-management.FDL",
-      "scenarioName": "Admin - accounts management - deactivate account"
+      "modelPath": "model/register-as-vendor.FDL",
+      "scenarioName": "Register as vendor - valid data, duplicate email",
+      "defines": ["VALID_DATA"]
     },
     {
-      "modelPath": "model/accounts-management.FDL",
-      "scenarioName": "Admin - accounts management - activate account",
-      "defines": ["DEACTIVATED"]
+      "modelPath": "model/register-as-vendor.FDL",
+      "scenarioName": "Register as vendor - valid data, unique email",
+      "defines": ["VALID_DATA", "UNIQUE_EMAIL"]
+    },
+    {
+      "modelPath": "model/register-as-vendor.FDL",
+      "scenarioName": "Register as vendor - invalid data"
+    },
+    {
+      "modelPath": "model/update-menu.FDL",
+      "scenarioName": "Update menu - valid data, vendor discards changes",
+      "defines": ["VALID_DATA"]
+    },
+    {
+      "modelPath": "model/update-menu.FDL",
+      "scenarioName": "Update menu - valid data, vendor saves updated menu",
+      "defines": ["VALID_DATA", "SAVE_CHANGES"]
+    },
+    {
+      "modelPath": "model/update-menu.FDL",
+      "scenarioName": "Update menu - invalid data"
+    },
+    {
+      "modelPath": "model/vendor-updates-location.FDL",
+      "scenarioName": "Vendor update location - Setting the location using GPS",
+      "defines": ["GPS_PERMISSION_GRANTED"]
+    },
+    {
+      "modelPath": "model/vendor-updates-location.FDL",
+      "scenarioName": "Vendor update location - manually setting the location with a valid address",
+      "defines": ["GPS_PERMISSION_NOT_GRANTED", "VALID_ADDRESS"]
+    },
+    {
+      "modelPath": "model/vendor-updates-location.FDL",
+      "scenarioName": "Vendor update location - manually setting the location with an invalid address",
+      "defines": ["GPS_PERMISSION_NOT_GRANTED", "INVALID_ADDRESS"]
+    },
+    {
+      "modelPath": "model/vendor-checks-feedback.FDL",
+      "scenarioName": "Vendor check feedback"
+    },
+    {
+      "modelPath": "model/vendor-updates-timetable.FDL",
+      "scenarioName": "Vendor update timetable"
     },
     {
       "modelPath": "model/authorize-vendor-accounts.FDL",
@@ -261,44 +183,28 @@
       "modelPath": "model/authorize-vendor-accounts.FDL",
       "scenarioName": "Admin - authorize vendor accounts - authorized",
       "defines": ["ACCEPT"]
-    }
-  ],
-
-  /* Specify the documents to be generated from this project.
-  "documentFormat"                 Choose between "pdf" and "emf" (MS Word Picture format)
-                                   Note: documentFormat defaults to "pdf" when omitted for a document.
-
-  "documentName"                   Defines the file name for the document
-
-  "documentType"                   Choose between "sequence-diagram" and "context-diagram"
-                                   Note: documentType defaults to "sequence-diagram" when omitted.
-
-  "interactionLevel"               Specify this option to define a high level sequence 
-                                   diagram at "system", "subsystem", "module" or "component" level.
-
-  "interfaceFilter"                Specify this option to limit the sequence diagram to interactions
-                                   involving a specified object, component, module, subsystem, system or
-                                   their respective type specifications.
-
-  "defines"                        Specify the preprocessor defines that are specific for this document.
-                                   The following standard defines are supported:
-                                   "POSTER" - US B size (11 inch x 17 inch) paper in portrait mode.
-                                   "PRESENTATION" - US legal paper in landscape mode,
-                                   "USE_CALLOUT_REMARKS" - Use callout style remarks.
-                                   "USE_MULTI_TIER_HEADER" - Display up to 5 tiers of the architecture.
-                                   You can define any custom defines in your diagrams to finely control
-                                   the content of individual documents. */
-  "documents": [
-    {
-      "documentName": "tier1"
     },
     {
-      "documentName": "tier2",
+      "modelPath": "model/accounts-management.FDL",
+      "scenarioName": "Admin - accounts management - deactivate account"
+    },
+    {
+      "modelPath": "model/accounts-management.FDL",
+      "scenarioName": "Admin - accounts management - activate account",
+      "defines": ["DEACTIVATED"]
+    }
+  ],
+  "documents": [
+    {
+      "documentName": "Sequence diagrams"
+    },
+    {
+      "documentName": "Component level sequence diagrams",
       "interactionLevel": "component"
     },
     {
-      "documentType": "context-diagram",
-      "documentName": "context"
+      "documentName": "Context diagrams",
+      "documentType": "context-diagram"
     }
   ]
 }

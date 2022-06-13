@@ -5,7 +5,7 @@
    "Client" invokes "Server"."RetrieveUserDetails"(vendorId)
    "Server" action "Retrieves user details including location details"
    "Server"."RetrieveUserDetails" returns (userDetails)
-   "Client" action  "Displays user details incl location"
+   "Client" action  "Displays user details including location"
    "Taps the location icon": "Vendor"->"Client"
    "Client" action "Displays Google Maps Address input form"
    "Client" action "Opens popup to request location access"
@@ -18,9 +18,9 @@
       #ifdef VALID_ADDRESS
          "Server"."RetrieveCurrentAddress" returns (validAddress)
       #else
-         sequence "Loops" {
+         loop "Set invalid address" {
             "Server"."RetrieveCurrentAddress" returns (invalidAddress)
-            "Client" action "Advises the user that the provided address is incorrect"
+            "Client" action "Notifies the user that the provided address is incorrect"
             "Client" action "Displays text input for address details"
             "Manually types an address":  "Vendor"->"Client"
             "Client" invokes "Server"."RetrieveCurrentAddress"(providedLocation)
@@ -37,6 +37,6 @@
    "Confirms that the address is ok":"Vendor"->"Client"
    "Client" invokes "Server"."SetCurrentAddress"(validAddress)
    "Server" action "Sets location to current address"   
-   "Server"."SetCurrentAddress" returns (successStatus)
+   "Server"."SetCurrentAddress" returns (success)
    "Client" action "Displays update success message"
 }
