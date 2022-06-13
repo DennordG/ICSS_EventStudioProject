@@ -186,11 +186,11 @@
     },
     {
       "modelPath": "model/accounts-management.FDL",
-      "scenarioName": "Admin - accounts management - deactivate account"
+      "scenarioName": "Admin - accounts management - activate account"
     },
     {
       "modelPath": "model/accounts-management.FDL",
-      "scenarioName": "Admin - accounts management - activate account",
+      "scenarioName": "Admin - accounts management - deactivate account",
       "defines": ["DEACTIVATED"]
     }
   ],

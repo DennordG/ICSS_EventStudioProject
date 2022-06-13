@@ -15,12 +15,12 @@
          "Tap to deactivate account": "Admin" -> "Client"
          "Client" invokes "Server".DeactivateAccount(accountId)
          "Server".DeactivateAccount returns ("success")
-         "Client" action "Update list - account marked as activated"
+         "Client" action "Update list - account marked as deactivated"
       #else
          "Tap to activate account": "Admin" -> "Client"
          "Client" invokes "Server".ActivateAccount(accountId)
          "Server".ActivateAccount returns ("success")
-         "Client" action "Update list - account marked as deactivated"
+         "Client" action "Update list - account marked as activated"
       #endif
     }
 }
