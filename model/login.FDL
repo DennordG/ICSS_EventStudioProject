@@ -2,24 +2,23 @@
 
 {MyTheme} feature "Login" {
 
-"Tap on Login button": "AnyUser" -> "Client"
-"Client" action "Display Login screen"
-"Fill in login form": "AnyUser" -> "Client"
-"Client" action "Validate Login form"
+"Taps on Login button": "AnyUser" -> "Client"
+"Client" action "Displays Login screen"
+"Fills in login form": "AnyUser" -> "Client"
+"Client" action "Validates Login form"
 
 #ifdef VALID_DATA
-   "Valid data": "Client" -> "AnyUser"
-   "Submit form": "AnyUser" -> "Client"
+   "Submits form": "AnyUser" -> "Client"
    "Client" invokes "Server".Login(email, password)
-   "Server" action "Check credentials"
+   "Server" action "Checks credentials"
    #ifdef WRONG_CREDENTIALS
       "Server".Login returns ("failedLogin")
-      "Client" action "Display failed login error message"
+      "Client" action "Displays failed login error message"
    #else 
    "Server".Login returns ("success")
-   "Client" action "Display home screen for each type of user"
+   "Client" action "Displays home screen for each type of user"
    #endif
 #else
-   "Client" action "Display validation errors"
+   "Client" action "Displays validation errors"
 #endif
 }
