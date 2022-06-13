@@ -243,6 +243,24 @@
       "modelPath": "model/provide-feedback.FDL",
       "scenarioName": "Provide feedback - valid form",
       "defines": ["VALID_FORM"]
+    },
+    {
+      "modelPath": "model/accounts-management.FDL",
+      "scenarioName": "Admin - accounts management - deactivate account"
+    },
+    {
+      "modelPath": "model/accounts-management.FDL",
+      "scenarioName": "Admin - accounts management - activate account",
+      "defines": ["DEACTIVATED"]
+    },
+    {
+      "modelPath": "model/authorize-vendor-accounts.FDL",
+      "scenarioName": "Admin - authorize vendor accounts - not authorized"
+    },
+    {
+      "modelPath": "model/authorize-vendor-accounts.FDL",
+      "scenarioName": "Admin - authorize vendor accounts - authorized",
+      "defines": ["ACCEPT"]
     }
   ],
 
