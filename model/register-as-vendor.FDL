@@ -11,7 +11,7 @@
    "Client" invokes "Server".CheckEmailUniqueness(email)
    "Server" action "Checks email uniqueness"
    #ifdef UNIQUE_EMAIL
-      "Server".CheckEmailUniqueness returns ("uniqueEmail")
+      "Server".CheckEmailUniqueness returns ("true")
       "Submits registration details": "Vendor" -> "Client"
       "Client" invokes "Server".RegisterAsVendor(registrationDetails)
       "Server" action "Creates vendor account with pending status"
@@ -19,7 +19,7 @@
       "Server"."RegisterVendor" returns ("createdVendorAccountWithPendingStatus")
       "Client" action "Informs Vendor to wait for Admin's decision"
    #else
-         "Server".CheckEmailUniqueness returns ("duplicateEmail")
+         "Server".CheckEmailUniqueness returns ("false")
          "Client" action "Displays duplicate email error message"
    #endif   
 #else
