@@ -11,7 +11,7 @@
         "Client" invokes "Server".CheckIfEmailIsAlreadyUsed(email)
         #ifdef VALID_EMAIL
             "Server".CheckIfEmailIsAlreadyUsed returns ("valid")
-            
+
             "Client" invokes "Server".CreateAccount(accountInformation)
             "Server".CreateAccount returns ("success")
             "Client" action "Display login activity"
@@ -19,7 +19,7 @@
             "Server".CheckIfEmailIsAlreadyUsed returns ("invalid")
             "Client" action "Show error message"
         #endif
-        
+
     #else
         "Client" action "Show the validation errors"
     #endif
